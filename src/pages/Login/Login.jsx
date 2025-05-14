@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import dishcordLogo from "../../assets/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,29 +20,45 @@ export default function Login() {
       return;
     }
 
-    const res = await fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const res = await fetch("/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (res.ok) {
-      navigate("/");
-    } else {
-      const error = await res.json();
-      console.error(error);
+      if (res.ok) {
+        navigate("/");
+      } else {
+        const error = await res.json();
+        console.error(error);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
     }
   }
 
   async function guestClicked() {
-    console.log("Big things coming soon ...");
+    navigate("/");
+  }
+
+  function toRegister() {
+    navigate("/register");
   }
 
   return (
     <>
-      <div className="loginWrapper">
+      <button className="pageSwitchButton" onClick={toRegister}>
+        Register instead
+      </button>
+
+      <h1>DishCord</h1>
+
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+
+      <div className="wrapper">
         <input className="username" placeholder="Enter username" type="text" />
         <input
           className="password"
@@ -53,9 +70,9 @@ export default function Login() {
           Login
         </button>
 
-        <button className="guestButton" onClick={guestClicked}>
+        <span className="guestLink" onClick={guestClicked}>
           Or continue as Guest
-        </button>
+        </span>
       </div>
     </>
   );

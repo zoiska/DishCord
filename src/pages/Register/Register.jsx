@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
+import dishcordLogo from "../../assets/logo.png";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -25,25 +26,41 @@ export default function Register() {
       return;
     }
 
-    const res = await fetch("http://localhost:3000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const res = await fetch("/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (res.ok) {
-      navigate("/");
-    } else {
-      const error = await res.json();
-      console.error(error);
+      if (res.ok) {
+        navigate("/");
+      } else {
+        const error = await res.json();
+        console.error(error);
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
     }
+  }
+
+  function toLogin() {
+    navigate("/login");
   }
 
   return (
     <>
-      <div>
+      <button className="pageSwitchButton" onClick={toLogin}>
+        Sign In
+      </button>
+
+      <h1>DishCord</h1>
+
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+
+      <div className="wrapper">
         <input className="username" placeholder="Enter username" type="text" />
         <input
           className="password"
