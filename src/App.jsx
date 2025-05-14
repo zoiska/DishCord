@@ -1,5 +1,6 @@
 import RecipeBrowser from "./pages/RecipeBrowser/RecipeBrowser.jsx";
 import Home from "./pages/Home/Home.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
 
 import { Route, Routes } from "react-router-dom";
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipe-browser" element={<RecipeBrowser />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <BottomNav />
     </>
