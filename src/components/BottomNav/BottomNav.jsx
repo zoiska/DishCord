@@ -11,7 +11,7 @@ function BottomNav() {
       <NavLink to="/" className="nav-link">
         <Home size={32} />
       </NavLink>
-      <NavLink to="/" className="nav-link">
+      <NavLink to="/profile" className="nav-link">
         <User size={32} />
       </NavLink>
     </div>
