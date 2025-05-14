@@ -1,19 +1,18 @@
-import { useState } from "react";
-import dishcordLogo from "./assets/logo.png";
+import RecipeBrowser from "./pages/RecipeBrowser/RecipeBrowser.jsx";
+import Home from "./pages/Home/Home.jsx";
+import BottomNav from "./components/BottomNav/BottomNav.jsx";
+
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <img src={dishcordLogo} className="logo" alt="Vite logo" />
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe-browser" element={<RecipeBrowser />} />
+      </Routes>
+      <BottomNav />
     </>
   );
 }
