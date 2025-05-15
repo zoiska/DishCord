@@ -16,8 +16,12 @@ function Home() {
         Sign In
       </button>
 
-      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-      <h1>DishCord</h1>
+      <div className="homeContainer">
+        <div className="home">
+          <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+          <h1>DishCord</h1>
+        </div>
+      </div>
     </>
   );
 }
