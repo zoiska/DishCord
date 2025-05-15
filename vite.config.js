@@ -11,21 +11,21 @@ export default defineConfig(({ mode }) => {
       VitePWA({
         registerType: "autoUpdate",
         manifest: {
-          name: "Meine PWA",
-          short_name: "PWA",
+          name: "DishCord",
+          short_name: "DishCord",
           start_url: "/",
           display: "standalone",
           orientation: "portrait",
-          background_color: "#ffffff",
-          theme_color: "#317EFB",
+          background_color: "#242424",
+          theme_color: "#242424",
           icons: [
             {
-              src: "/src/assets/icons/icon-192x192.png",
+              src: "assets/icon-192x192.png",
               sizes: "192x192",
               type: "image/png",
             },
             {
-              src: "/src/assets/icons/icon-512x512.png",
+              src: "/assets/icon-512x512.png",
               sizes: "512x512",
               type: "image/png",
             },
