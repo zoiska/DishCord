@@ -20,11 +20,6 @@ export default defineConfig(({ mode }) => {
           theme_color: "#242424",
           icons: [
             {
-              src: "assets/icon-192x192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
               src: "/assets/icon-512x512.png",
               sizes: "512x512",
               type: "image/png",
@@ -35,7 +30,7 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       proxy: {
-        "/auth": {
+        "/": {
           target: env.VITE_API_URL,
           changeOrigin: true,
           secure: false,
