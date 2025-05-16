@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       proxy: {
-        "/": {
+        "/auth": {
           target: env.VITE_API_URL,
           changeOrigin: true,
           secure: false,
