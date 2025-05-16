@@ -52,31 +52,32 @@ export default function Register() {
 
   return (
     <>
-      <button className="pageSwitchButton" onClick={toLogin}>
-        Sign In
-      </button>
-
-      <h1>DishCord</h1>
-
-      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-
       <div className="wrapper">
-        <input className="username" placeholder="Enter username" type="text" />
-        <input
-          className="password"
-          placeholder="Enter password"
-          type="password"
-          onKeyDown={handleEnter}
-        />
-        <input
-          className="passwordVerify"
-          placeholder="Verify password"
-          type="password"
-          onKeyDown={handleEnter}
-        />
-        <button className="registerButton" onClick={registerClicked}>
-          Register
-        </button>
+        <h1>DishCord</h1>
+
+        <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+
+        <div className="inputContainer">
+          <input className="username" placeholder="Enter username" type="text" />
+          <input
+            className="password"
+            placeholder="Enter password"
+            type="password"
+            onKeyDown={handleEnter}
+          />
+          <input
+            className="passwordVerify"
+            placeholder="Verify password"
+            type="password"
+            onKeyDown={handleEnter}
+          />
+          <div id="registerButtons">
+            <button onClick={toLogin}>Cancel</button>
+            <button className="registerButton" onClick={registerClicked}>
+              Register
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
