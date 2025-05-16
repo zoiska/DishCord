@@ -12,7 +12,7 @@ function Home() {
 
   return (
     <>
-      <button className="pageSwitchButton" onClick={toLogin}>
+      <button id="signInButton" onClick={toLogin}>
         Sign In
       </button>
 

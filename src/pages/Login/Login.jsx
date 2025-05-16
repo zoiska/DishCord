@@ -50,26 +50,25 @@ export default function Login() {
 
   return (
     <>
-      <button className="pageSwitchButton" onClick={toRegister}>
-        Register instead
-      </button>
-
-      <h1>DishCord</h1>
-
-      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-
       <div className="wrapper">
-        <input className="username" placeholder="Enter username" type="text" />
-        <input
-          className="password"
-          placeholder="Enter password"
-          type="password"
-          onKeyDown={handleEnter}
-        />
-        <button className="loginButton" onClick={loginClicked}>
-          Login
-        </button>
+        <h1>DishCord</h1>
 
+        <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+        <div className="inputContainer">
+          <input className="username" placeholder="Enter username" type="text" />
+          <input
+            className="password"
+            placeholder="Enter password"
+            type="password"
+            onKeyDown={handleEnter}
+          />
+          <div id="loginButtons">
+            <button onClick={toRegister}>Register instead</button>
+            <button className="loginButton" onClick={loginClicked}>
+              Login
+            </button>
+          </div>
+        </div>
         <span className="guestLink" onClick={guestClicked}>
           Or continue as Guest
         </span>

@@ -5,14 +5,21 @@ import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
 
-
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-
 
 function App() {
   const location = useLocation();
   const hideNav = location.pathname === "/login" || location.pathname === "/register";
+  const signedIn = true; // TODO: replace with actual authentication check
+
+  function checkSignedIn() {
+    if (signedIn) {
+      return <Profile />;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  }
 
   return (
     <>
@@ -21,7 +28,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
         <Route path="/recipe-browser" element={<RecipeBrowser />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={checkSignedIn()} />
       </Routes>
 
       {!hideNav && <BottomNav />}

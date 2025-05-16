@@ -3,47 +3,53 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 80vw;
+  width: 60vw;
   justify-self: center;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
 }
 
 input {
   display: flex;
-  color: #7e64ff;
+  color: #fff;
   background-color: transparent;
   text-align: center;
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid #7e64ff;
-  width: calc(100% - 20px); /* remove padding x2 */
-  padding: 10px;
+  padding: 10px 0;
+  width: 100%;
 }
 
 input:focus {
-  border: 1px solid #535bf2;
   outline: none;
+}
+
+#registerButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 button {
   display: flex;
   justify-content: center;
-  color: #7e64ff;
-  background-color: transparent;
+  color: #fff;
+  font-weight: bold;
+  background-color: #5f4bc2;
   border-radius: 16px;
-  border: 1px solid #7e64ff;
-  width: 100%;
-  padding: 10px;
+  border: 1px solid #5f4bc2;
+  padding: 10px 0;
   cursor: pointer;
   outline: none;
+  width: 100%;
+  opacity: 1;
 }
 
 button:hover {
-  color: #535bf2;
-}
-
-.pageSwitchButton {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 150px;
+  opacity: 0.9;
 }

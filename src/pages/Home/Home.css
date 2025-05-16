@@ -2,6 +2,7 @@
   height: 20dvh;
   will-change: filter;
   filter: drop-shadow(0 0 20px #ffffffd0);
+  margin: 3dvh;
 }
 
 .homeContainer {
@@ -13,4 +14,11 @@
 
 .home {
   text-align: center;
+}
+
+#signInButton {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 7em;
 }
