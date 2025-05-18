@@ -1,0 +1,47 @@
+.tile-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tile-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tile {
+  background: #484848;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.tile:hover {
+  background: #a0a0a0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.modal-content {
+  background: #242424;
+  height: calc(100dvh - 120px);
+  width: 100dvw;
+  padding: 0 5%;
+}
+
+.floating-close-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4rem;
+}

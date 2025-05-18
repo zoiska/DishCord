@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  height: 100dvh;
+}
+
+.recipe-browser {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  margin-bottom: 60px;
+}
