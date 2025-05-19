@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 1rem;
   gap: 1rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -13,7 +12,7 @@
 
 .tile {
   background: #484848;
-  padding: 1rem;
+  padding: 2rem 1rem;
   border-radius: 8px;
   text-align: center;
   transition: background 0.2s;
@@ -37,6 +36,19 @@
   height: calc(100dvh - 120px);
   width: 100dvw;
   padding: 0 5%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.modal-content h2 {
+  font-size: 2rem;
+  margin: 1rem 0 0 0;
+}
+.modal-content h3 {
+  margin: 2rem 0 0 0;
+  padding: 0;
+  color: #7e64ff;
+  font-size: 1.5rem;
 }
 
 .floating-close-button {
@@ -44,4 +56,21 @@
   bottom: 1rem;
   right: 1rem;
   width: 4rem;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #333;
+}
+.ingredient-name,
+.ingredient-amount {
+  font-size: 1rem;
 }

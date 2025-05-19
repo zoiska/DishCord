@@ -1,5 +1,5 @@
 import "./RecipeBrowser.css";
-import RecipeTileList from "./RecipeTileList";
+import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { useEffect, useState } from "react";
 
 function RecipeBrowser() {
@@ -16,7 +16,7 @@ function RecipeBrowser() {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="recipe-browser-wrapper">
         <h1>Recipe Browser</h1>
         <form role="search">
           <input type="search" name="query" placeholder="Search..." />
