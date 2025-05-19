@@ -1,17 +1,15 @@
 import "./RecipeBrowser.css";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { useEffect, useState } from "react";
+import { getAllRecipes } from "../../services/RecipeService";
 
 function RecipeBrowser() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    async function fetchRecipes() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/recipes`);
-      const data = await response.json();
-      setRecipes(data);
-    }
-    fetchRecipes();
+    getAllRecipes().then((r) => {
+      setRecipes(r);
+    });
   }, []);
 
   return (
