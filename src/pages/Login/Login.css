@@ -8,7 +8,7 @@
   text-decoration: underline;
 }
 
-#loginButtons {
+.loginButtons {
   display: flex;
   flex-direction: row;
   gap: 5px;
