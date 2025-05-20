@@ -5,13 +5,25 @@ import dishcordLogo from "../../assets/logo.png";
 
 export default function Login() {
   const [user, setUser] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prev) => ({
-      ...prev,
+    setUser((prevUser) => ({
+      ...prevUser,
       [name]: value,
     }));
+
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (name === "username" && value && value.length >= 4) {
+        delete newErrors.username;
+      }
+      if (name === "password" && value && value.length >= 8) {
+        delete newErrors.password;
+      }
+      return newErrors;
+    });
   };
 
   const navigate = useNavigate();
@@ -43,9 +55,28 @@ export default function Login() {
     }
   }
 
+  const validate = () => {
+    const errors = {};
+    if (!user.username) {
+      errors.username = "Username is required";
+    } else if (user.username.length < 4) {
+      errors.username = "Username must be at least 4 characters";
+    }
+    if (!user.password) {
+      errors.password = "Password is required";
+    } else if (user.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+    }
+    return errors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    login();
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      login();
+    }
   };
 
   return (
@@ -53,14 +84,31 @@ export default function Login() {
       <h1>DishCord</h1>
       <img src={dishcordLogo} className="logo" alt="DishCord logo" />
 
-      <form className="inputContainer" onSubmit={handleSubmit}>
-        <input name="username" placeholder="Enter username" type="text" onChange={handleChange} />
+      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
         <input
-          name="password"
-          placeholder="Enter password"
-          type="password"
+          className={`login-input ${
+            errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
+          }`}
+          type="text"
+          name="username"
+          required
+          minlength="4"
+          placeholder="Username"
           onChange={handleChange}
         />
+        {errors.username && <p className="error">{errors.username}</p>}
+        <input
+          className={`login-input ${
+            errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
+          }`}
+          type="password"
+          name="password"
+          required
+          minlength="8"
+          placeholder="Password"
+          onChange={handleChange}
+        />
+        {errors.password && <p className="error">{errors.password}</p>}
         <div className="loginButtons">
           <button type="button" onClick={() => navigate("/register")}>
             Register instead

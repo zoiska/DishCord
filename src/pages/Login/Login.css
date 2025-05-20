@@ -13,3 +13,17 @@
   flex-direction: row;
   gap: 5px;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+}
+
+.login-input.invalid {
+  border-color: red;
+}
+
+.login-input.valid {
+  border-color: green;
+}
