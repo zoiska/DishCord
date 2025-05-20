@@ -1,6 +1,6 @@
 import "./BottomNav.css";
-import { NavLink } from "react-router-dom";
 import { Home, Search, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function BottomNav() {
   return (
