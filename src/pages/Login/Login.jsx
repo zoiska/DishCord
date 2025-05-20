@@ -1,78 +1,124 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import dishcordLogo from "../../assets/logo.png";
 
 export default function Login() {
+  const [user, setUser] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (name === "username" && value && value.length >= 4) {
+        delete newErrors.username;
+      }
+      if (name === "password" && value && value.length >= 8) {
+        delete newErrors.password;
+      }
+      return newErrors;
+    });
+  };
+
   const navigate = useNavigate();
 
-  async function handleEnter(e) {
-    if (e.key === "Enter") {
-      loginClicked();
-    }
-  }
-
-  async function loginClicked() {
-    const username = document.querySelector(".username").value;
-    const password = document.querySelector(".password").value;
-
-    if (username === "" || password === "") {
-      console.error("Username or password cannot be empty");
-      return;
-    }
-
+  async function login() {
     try {
       const res = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ user }),
       });
 
       if (res.ok) {
+        // TODO: Handle success
+        // Store user data in local storage or context
         navigate("/");
       } else {
+        // TODO: Handle error (show UI message)
+        // "wrong password" or "user not found"
         const error = await res.json();
         console.error(error);
       }
     } catch (error) {
+      // TODO: Handle error (show UI message)
+      // "Network error" or "Server not reachable" probably
       console.error("Login error:", error);
     }
   }
 
-  async function guestClicked() {
-    navigate("/");
-  }
+  const validate = () => {
+    const errors = {};
+    if (!user.username) {
+      errors.username = "Username is required";
+    } else if (user.username.length < 4) {
+      errors.username = "Username must be at least 4 characters";
+    }
+    if (!user.password) {
+      errors.password = "Password is required";
+    } else if (user.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+    }
+    return errors;
+  };
 
-  function toRegister() {
-    navigate("/register");
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      login();
+    }
+  };
 
   return (
-    <>
-      <div className="wrapper">
-        <h1>DishCord</h1>
+    <div className="wrapper">
+      <h1>DishCord</h1>
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
 
-        <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-        <div className="inputContainer">
-          <input className="username" placeholder="Enter username" type="text" />
-          <input
-            className="password"
-            placeholder="Enter password"
-            type="password"
-            onKeyDown={handleEnter}
-          />
-          <div id="loginButtons">
-            <button onClick={toRegister}>Register instead</button>
-            <button className="loginButton" onClick={loginClicked}>
-              Login
-            </button>
-          </div>
+      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
+        <input
+          className={`login-input ${
+            errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
+          }`}
+          type="text"
+          name="username"
+          required
+          minlength="4"
+          placeholder="Username"
+          onChange={handleChange}
+        />
+        {errors.username && <p className="error">{errors.username}</p>}
+        <input
+          className={`login-input ${
+            errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
+          }`}
+          type="password"
+          name="password"
+          required
+          minlength="8"
+          placeholder="Password"
+          onChange={handleChange}
+        />
+        {errors.password && <p className="error">{errors.password}</p>}
+        <div className="loginButtons">
+          <button type="button" onClick={() => navigate("/register")}>
+            Register instead
+          </button>
+          <button type="submit">Login</button>
         </div>
-        <span className="guestLink" onClick={guestClicked}>
-          Or continue as Guest
-        </span>
-      </div>
-    </>
+      </form>
+      <span className="guestLink" onClick={() => navigate("/")}>
+        Or continue as Guest
+      </span>
+    </div>
   );
 }
