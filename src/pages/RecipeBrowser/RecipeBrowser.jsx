@@ -1,7 +1,7 @@
-import "./RecipeBrowser.css";
-import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { useEffect, useState } from "react";
+import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
+import "./RecipeBrowser.css";
 
 function RecipeBrowser() {
   const [recipes, setRecipes] = useState([]);
