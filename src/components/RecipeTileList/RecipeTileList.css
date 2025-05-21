@@ -1,0 +1,76 @@
+.tile-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tile-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tile {
+  background: #484848;
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.tile:hover {
+  background: #a0a0a0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.modal-content {
+  background: #242424;
+  height: calc(100dvh - 120px);
+  width: 100dvw;
+  padding: 0 5%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.modal-content h2 {
+  font-size: 2rem;
+  margin: 1rem 0 0 0;
+}
+.modal-content h3 {
+  margin: 2rem 0 0 0;
+  padding: 0;
+  color: #7e64ff;
+  font-size: 1.5rem;
+}
+
+.floating-close-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4rem;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #333;
+}
+.ingredient-name,
+.ingredient-amount {
+  font-size: 1rem;
+}

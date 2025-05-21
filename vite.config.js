@@ -21,8 +21,13 @@ export default defineConfig(({ mode }) => {
           theme_color: "#242424",
           icons: [
             {
-              src: "/assets/icon-512x512.png",
+              src: "/icons/icon-512x512.png",
               sizes: "512x512",
+              type: "image/png",
+            },
+            {
+              src: "/icons/icon-192x192.png",
+              sizes: "192x192",
               type: "image/png",
             },
           ],
