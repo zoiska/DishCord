@@ -9,7 +9,17 @@ const RecipeTileList = ({ recipes }) => {
       <div className="tile-list">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="tile" onClick={() => setSelectedRecipe(recipe)}>
-            {recipe.name}
+            <div className="tile-content">
+              <p className="tile-name">{recipe.name}</p>
+              <p className="tile-author">{"- " + recipe.author}</p>
+            </div>
+            {recipe.imageUrls && recipe.imageUrls.length > 0 && (
+              <img
+                className="tile-image"
+                src={`${import.meta.env.VITE_API_URL}${recipe.imageUrls[0]}`}
+                alt={recipe.name}
+              />
+            )}
           </div>
         ))}
       </div>
