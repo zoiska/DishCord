@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./RecipeTileList.css";
+import { ThumbsUp, ThumbsDown, Bookmark } from "lucide-react";
 
 const RecipeTileList = ({ recipes }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -12,6 +13,16 @@ const RecipeTileList = ({ recipes }) => {
             <div className="tile-content">
               <p className="tile-name">{recipe.name}</p>
               <p className="tile-author">{"- " + recipe.author}</p>
+            </div>
+            <div className="tile-ratings">
+              <div className="tile-rating-icons">
+                <ThumbsUp color="green" />
+                <ThumbsDown color="red" />
+              </div>
+              <div className="tile-rating-values">
+                <span>{77}</span>
+                <span>{44}</span>
+              </div>
             </div>
             {recipe.imageUrls && recipe.imageUrls.length > 0 && (
               <img
