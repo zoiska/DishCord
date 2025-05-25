@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import dishcordLogo from "../../assets/logo.png";
+import { useAuth } from "../../authContext.jsx";
 
 export default function Login() {
+  let { setIsAuthenticated } = useAuth();
+
   const [user, setUser] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
 
@@ -43,6 +46,7 @@ export default function Login() {
         // Store user data in local storage or context
         const data = await res.json();
         localStorage.setItem("t", data.token);
+        setIsAuthenticated(true);
         navigate("/");
       } else {
         // TODO: Handle error (show UI message)

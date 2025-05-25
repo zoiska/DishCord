@@ -22,3 +22,10 @@
   left: 1em;
   width: 7em;
 }
+
+#logoutButton {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 7em;
+}
