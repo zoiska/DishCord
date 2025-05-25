@@ -11,32 +11,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-primary: #7e64ff;
+
+  --bottomNav-height: 3.5rem;
 }
 
-html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
-  width: 100dvw;
-}
-
-a {
-  font-weight: 500;
-  color: #7e64ff;
-  text-decoration: inherit;
-}
-
-body {
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  width: 100%;
-  justify-content: center;
-}
-
-h1 {
-  font-size: 3em;
-  line-height: 1.1;
-  margin: 0px;
+  padding: 0;
 }

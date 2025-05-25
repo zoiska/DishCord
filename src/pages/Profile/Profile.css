@@ -1,0 +1,7 @@
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100dvh - var(--bottomNav-height));
+}

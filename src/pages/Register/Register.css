@@ -1,10 +1,17 @@
-.wrapper {
+.register-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 60vw;
   justify-self: center;
+  height: calc(100dvh - var(--bottomNav-height));
+}
+
+.register-logo {
+  height: 20dvh;
+  will-change: filter;
+  filter: drop-shadow(0 0 20px #ffffffd0);
 }
 
 .inputContainer {
@@ -14,19 +21,15 @@
   width: 100%;
 }
 
-input {
+.register-wrapper input {
   display: flex;
   color: #fff;
   background-color: transparent;
   text-align: center;
   border-radius: 14px;
-  border: 1px solid #7e64ff;
+  border: 1px solid var(--color-primary);
   padding: 10px 0;
   width: 100%;
-}
-
-input:focus {
-  outline: none;
 }
 
 #registerButtons {
@@ -35,7 +38,7 @@ input:focus {
   gap: 5px;
 }
 
-button {
+.register-wrapper button {
   display: flex;
   justify-content: center;
   color: #fff;
@@ -50,7 +53,7 @@ button {
   opacity: 1;
 }
 
-button:hover {
+.register-wrapper button:hover {
   opacity: 0.9;
 }
 

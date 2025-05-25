@@ -6,7 +6,6 @@ import Login from "./pages/Login/Login.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import RecipeBrowser from "./pages/RecipeBrowser/RecipeBrowser.jsx";
 import Register from "./pages/Register/Register.jsx";
-
 import "./App.css";
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
   const hideNav = location.pathname === "/login" || location.pathname === "/register";
 
   return (
-    <>
+    <div className="app">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -37,7 +36,7 @@ function App() {
       </Routes>
 
       {!hideNav && <BottomNav />}
-    </>
+    </div>
   );
 }
 

@@ -31,12 +31,9 @@ function Home() {
           Logout
         </button>
       )}
-
-      <div className="homeContainer">
-        <div className="home">
-          <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-          <h1>DishCord</h1>
-        </div>
+      <div className="home-wrapper">
+        <img src={dishcordLogo} className="home-logo" alt="DishCord logo" />
+        <h1>DishCord</h1>
       </div>
     </>
   );

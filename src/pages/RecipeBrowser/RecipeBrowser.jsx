@@ -13,17 +13,15 @@ function RecipeBrowser() {
   }, []);
 
   return (
-    <>
-      <div className="recipe-browser-wrapper">
-        <h1>Recipe Browser</h1>
-        <form role="search">
-          <input type="search" name="query" placeholder="Search..." />
-        </form>
-        <div className="recipe-browser">
-          <RecipeTileList recipes={recipes} />
-        </div>
+    <div className="recipe-browser-wrapper">
+      <h1>Recipe Browser</h1>
+      <form role="search">
+        <input type="search" name="query" placeholder="Search..." />
+      </form>
+      <div className="recipe-browser">
+        <RecipeTileList recipes={recipes} />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,3 +1,13 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  justify-self: center;
+  height: calc(100dvh - var(--bottomNav-height));
+}
+
 .guestLink {
   cursor: pointer;
   padding-top: 20px;
@@ -26,4 +36,40 @@
 
 .login-input.valid {
   border-color: green;
+}
+
+.login-logo {
+  height: 20dvh;
+  will-change: filter;
+  filter: drop-shadow(0 0 20px #ffffffd0);
+}
+
+.login-wrapper input {
+  display: flex;
+  color: #fff;
+  background-color: transparent;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid var(--color-primary);
+  padding: 10px 0;
+  width: 100%;
+}
+
+.login-wrapper button {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  background-color: #5f4bc2;
+  border-radius: 16px;
+  border: 1px solid #5f4bc2;
+  padding: 10px 0;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  opacity: 1;
+}
+
+.login-wrapper button:hover {
+  opacity: 0.9;
 }

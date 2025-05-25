@@ -42,8 +42,6 @@ export default function Login() {
       });
 
       if (res.ok) {
-        // TODO: Handle success
-        // Store user data in local storage or context
         const data = await res.json();
         localStorage.setItem("t", data.token);
         setIsAuthenticated(true);
@@ -86,9 +84,9 @@ export default function Login() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="login-wrapper">
+      <img src={dishcordLogo} className="login-logo" alt="DishCord logo" />
       <h1>DishCord</h1>
-      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
 
       <form className="inputContainer" onSubmit={handleSubmit} noValidate>
         <input
