@@ -1,20 +1,36 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import dishcordLogo from "../../assets/logo.png";
+import { useAuth } from "../../authContext.jsx";
 
 function Home() {
   const navigate = useNavigate();
+  let { isAuthenticated, setIsAuthenticated } = useAuth();
+  let showSignInButton = !isAuthenticated;
+  let showLogoutButton = isAuthenticated;
 
   function toLogin() {
-    // TODO: only show this if not logged in
+    navigate("/login");
+  }
+
+  function logoutToLogin() {
+    setIsAuthenticated(false);
+    localStorage.removeItem("t");
     navigate("/login");
   }
 
   return (
     <>
-      <button id="signInButton" onClick={toLogin}>
-        Sign In
-      </button>
+      {showSignInButton && (
+        <button id="signInButton" onClick={toLogin}>
+          Sign In
+        </button>
+      )}
+      {showLogoutButton && (
+        <button id="logoutButton" onClick={logoutToLogin}>
+          Logout
+        </button>
+      )}
 
       <div className="homeContainer">
         <div className="home">

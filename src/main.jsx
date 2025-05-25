@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { registerSW } from "virtual:pwa-register";
+import { AuthCheck } from "./authContext.jsx";
 import App from "./App.jsx";
 
 registerSW();
@@ -10,7 +11,9 @@ registerSW();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthCheck>
+        <App />
+      </AuthCheck>
     </BrowserRouter>
   </StrictMode>
 );

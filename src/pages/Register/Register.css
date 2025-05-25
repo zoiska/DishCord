@@ -53,3 +53,17 @@ button {
 button:hover {
   opacity: 0.9;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+}
+
+.register-input.invalid {
+  border-color: red;
+}
+
+.register-input.valid {
+  border-color: green;
+}
