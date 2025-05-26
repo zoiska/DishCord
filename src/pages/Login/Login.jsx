@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import dishcordLogo from "../../assets/logo.png";
+import { useAuth } from "../../authContext.jsx";
 
 export default function Login() {
+  let { setIsAuthenticated } = useAuth();
+
   const [user, setUser] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
 
@@ -35,12 +38,13 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user }),
+        body: JSON.stringify(user),
       });
 
       if (res.ok) {
-        // TODO: Handle success
-        // Store user data in local storage or context
+        const data = await res.json();
+        localStorage.setItem("t", data.token);
+        setIsAuthenticated(true);
         navigate("/");
       } else {
         // TODO: Handle error (show UI message)
@@ -80,11 +84,11 @@ export default function Login() {
   };
 
   return (
-    <div className="wrapper">
-      <h1>DishCord</h1>
+    <div className="login-wrapper">
       <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+      <h1 className="title">DishCord</h1>
 
-      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
+      <form className="input-container" onSubmit={handleSubmit} noValidate>
         <input
           className={`login-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
@@ -92,11 +96,11 @@ export default function Login() {
           type="text"
           name="username"
           required
-          minlength="4"
-          placeholder="Username"
+          minLength="4"
+          placeholder="Enter username"
           onChange={handleChange}
         />
-        {errors.username && <p className="error">{errors.username}</p>}
+        {errors.username && <p className="error-text">{errors.username}</p>}
         <input
           className={`login-input ${
             errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
@@ -104,19 +108,21 @@ export default function Login() {
           type="password"
           name="password"
           required
-          minlength="8"
-          placeholder="Password"
+          minLength="8"
+          placeholder="Enter password"
           onChange={handleChange}
         />
-        {errors.password && <p className="error">{errors.password}</p>}
-        <div className="loginButtons">
-          <button type="button" onClick={() => navigate("/register")}>
+        {errors.password && <p className="error-text">{errors.password}</p>}
+        <div className="login-buttons-container">
+          <button className="secondary-button" type="button" onClick={() => navigate("/register")}>
             Register instead
           </button>
-          <button type="submit">Login</button>
+          <button className="primary-button" type="submit">
+            Login
+          </button>
         </div>
       </form>
-      <span className="guestLink" onClick={() => navigate("/")}>
+      <span className="guest-link" onClick={() => navigate("/")}>
         Or continue as Guest
       </span>
     </div>

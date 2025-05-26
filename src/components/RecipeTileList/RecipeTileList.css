@@ -68,7 +68,7 @@
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 100;
 }
 .modal-content {
   background: #242424;
@@ -86,7 +86,7 @@
 .modal-content h3 {
   margin: 2rem 0 0 0;
   padding: 0;
-  color: #7e64ff;
+  color: var(--color-primary);
   font-size: 1.5rem;
 }
 
