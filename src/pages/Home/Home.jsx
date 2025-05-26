@@ -22,21 +22,18 @@ function Home() {
   return (
     <>
       {showSignInButton && (
-        <button id="signInButton" onClick={toLogin}>
+        <button id="signInButton" className="secondary-button" onClick={toLogin}>
           Sign In
         </button>
       )}
       {showLogoutButton && (
-        <button id="logoutButton" onClick={logoutToLogin}>
+        <button id="logoutButton" className="secondary-button" onClick={logoutToLogin}>
           Logout
         </button>
       )}
-
-      <div className="homeContainer">
-        <div className="home">
-          <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-          <h1>DishCord</h1>
-        </div>
+      <div className="home-wrapper">
+        <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+        <h1 className="title">DishCord</h1>
       </div>
     </>
   );

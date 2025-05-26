@@ -1,28 +1,13 @@
-.logo {
-  height: 20dvh;
-  will-change: filter;
-  filter: drop-shadow(0 0 20px #ffffffd0);
-  margin: 3dvh;
-}
-
-.homeContainer {
+.home-wrapper {
+  height: calc(100dvh - var(--bottomNav-height));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.home {
   text-align: center;
 }
 
-#signInButton {
-  position: absolute;
-  top: 1em;
-  left: 1em;
-  width: 7em;
-}
-
+#signInButton,
 #logoutButton {
   position: absolute;
   top: 1em;

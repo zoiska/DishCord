@@ -83,57 +83,56 @@ export default function Register() {
   }
 
   return (
-    <>
-      <div className="wrapper">
-        <h1>DishCord</h1>
+    <div className="register-wrapper">
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+      <h1 className="title">DishCord</h1>
 
-        <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-
-        <form className="inputContainer" onSubmit={handleSubmit} noValidate>
-          <input
-            className={`register-input ${
-              errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
-            }`}
-            type="text"
-            name="username"
-            required
-            minLength="4"
-            placeholder="Enter username"
-            onChange={handleChange}
-          />
-          {errors.username && <p className="error">{errors.username}</p>}
-          <input
-            className={`register-input ${
-              errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
-            }`}
-            type="password"
-            name="password"
-            required
-            minLength="8"
-            placeholder="Enter password"
-            onChange={handleChange}
-          />
-          {errors.password && <p className="error">{errors.password}</p>}
-          <input
-            className={`register-input ${
-              errors.passwordVerify ? "invalid" : user.passwordVerify.length >= 8 ? "valid" : ""
-            }`}
-            type="password"
-            name="passwordVerify"
-            required
-            minLength="8"
-            placeholder="Verify password"
-            onChange={handleChange}
-          />
-          {errors.passwordVerify && <p className="error">{errors.passwordVerify}</p>}
-          <div id="registerButtons">
-            <button type="button" onClick={toLogin}>
-              Cancel
-            </button>
-            <button type="submit">Register</button>
-          </div>
-        </form>
-      </div>
-    </>
+      <form className="input-container" onSubmit={handleSubmit} noValidate>
+        <input
+          className={`register-input ${
+            errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
+          }`}
+          type="text"
+          name="username"
+          required
+          minLength="4"
+          placeholder="Enter username"
+          onChange={handleChange}
+        />
+        {errors.username && <p className="error-text">{errors.username}</p>}
+        <input
+          className={`register-input ${
+            errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
+          }`}
+          type="password"
+          name="password"
+          required
+          minLength="8"
+          placeholder="Enter password"
+          onChange={handleChange}
+        />
+        {errors.password && <p className="error-text">{errors.password}</p>}
+        <input
+          className={`register-input ${
+            errors.passwordVerify ? "invalid" : user.passwordVerify.length >= 8 ? "valid" : ""
+          }`}
+          type="password"
+          name="passwordVerify"
+          required
+          minLength="8"
+          placeholder="Verify password"
+          onChange={handleChange}
+        />
+        {errors.passwordVerify && <p className="error-text">{errors.passwordVerify}</p>}
+        <div className="register-buttons-container">
+          <button className="secondary-button" type="button" onClick={toLogin}>
+            Cancel
+          </button>
+          <button className="primary-button" type="submit">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

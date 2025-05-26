@@ -42,8 +42,6 @@ export default function Login() {
       });
 
       if (res.ok) {
-        // TODO: Handle success
-        // Store user data in local storage or context
         const data = await res.json();
         localStorage.setItem("t", data.token);
         setIsAuthenticated(true);
@@ -86,11 +84,11 @@ export default function Login() {
   };
 
   return (
-    <div className="wrapper">
-      <h1>DishCord</h1>
+    <div className="login-wrapper">
       <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+      <h1 className="title">DishCord</h1>
 
-      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
+      <form className="input-container" onSubmit={handleSubmit} noValidate>
         <input
           className={`login-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
@@ -99,10 +97,10 @@ export default function Login() {
           name="username"
           required
           minLength="4"
-          placeholder="Username"
+          placeholder="Enter username"
           onChange={handleChange}
         />
-        {errors.username && <p className="error">{errors.username}</p>}
+        {errors.username && <p className="error-text">{errors.username}</p>}
         <input
           className={`login-input ${
             errors.password ? "invalid" : user.password.length >= 8 ? "valid" : ""
@@ -111,18 +109,20 @@ export default function Login() {
           name="password"
           required
           minLength="8"
-          placeholder="Password"
+          placeholder="Enter password"
           onChange={handleChange}
         />
-        {errors.password && <p className="error">{errors.password}</p>}
-        <div className="loginButtons">
-          <button type="button" onClick={() => navigate("/register")}>
+        {errors.password && <p className="error-text">{errors.password}</p>}
+        <div className="login-buttons-container">
+          <button className="secondary-button" type="button" onClick={() => navigate("/register")}>
             Register instead
           </button>
-          <button type="submit">Login</button>
+          <button className="primary-button" type="submit">
+            Login
+          </button>
         </div>
       </form>
-      <span className="guestLink" onClick={() => navigate("/")}>
+      <span className="guest-link" onClick={() => navigate("/")}>
         Or continue as Guest
       </span>
     </div>

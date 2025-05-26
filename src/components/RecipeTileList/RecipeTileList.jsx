@@ -28,7 +28,10 @@ const RecipeTileList = ({ recipes }) => {
             </div>
             <h3>Zubereitung</h3>
             <p>{selectedRecipe.preparation}</p>
-            <button className="floating-close-button" onClick={() => setSelectedRecipe(null)}>
+            <button
+              className="secondary-button floating-close-button"
+              onClick={() => setSelectedRecipe(null)}
+            >
               Close
             </button>
           </div>
