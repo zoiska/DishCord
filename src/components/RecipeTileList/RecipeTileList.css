@@ -11,38 +11,39 @@
 }
 
 .tile {
-  background: #3e264f;
+  background: var(--color-background-secondary);
   border-radius: 8px;
   text-align: center;
   transition: background 0.2s;
   height: 20dvh;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
   justify-content: space-between;
   overflow: hidden;
   flex-direction: row;
-  box-shadow: 0 0 24px rgba(222, 222, 222, 0.6) inset;
+  box-shadow: 0 0 12px rgba(222, 222, 222, 0.6) inset;
+  position: relative;
 }
 .tile:hover {
   background: #a0a0a0;
 }
 
 .tile-image {
-  width: 52%;
+  width: 55%;
   height: auto;
   margin-right: -10%;
-  mask-image: linear-gradient(to right, transparent 0%, black 60%);
+  mask-image: linear-gradient(to right, transparent 5%, white 30%);
   mask-size: 100% 100%;
 }
 
 .tile-content {
   display: flex;
   flex-direction: column;
-  width: 48%;
+  width: 35%;
 }
 .tile-name {
-  font-size: 1.2rem;
+  color: white;
+  font-size: 1rem;
   font-weight: bold;
 }
 .tile-author {
@@ -50,14 +51,22 @@
 }
 
 .tile-ratings {
-  font-size: 1rem;
-  width: 21%;
+  width: 20%;
 }
 .tile-rating-icons > * {
   margin: 5px;
 }
 .tile-rating-values > * {
+  font-size: 0.8rem;
   margin: 5px;
+}
+
+.bookmark {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transform: none;
+  z-index: 1;
 }
 
 .modal {
@@ -72,9 +81,9 @@
 }
 .modal-content {
   background: #242424;
-  height: calc(100dvh - 120px);
+  height: calc(100dvh - 2rem - var(--bottomNav-height) * 2);
   width: 100dvw;
-  padding: 0 5%;
+  padding: 0 2rem 2rem 2rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -92,9 +101,9 @@
 
 .floating-close-button {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  width: 4rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 6rem;
 }
 
 .ingredient-list {
