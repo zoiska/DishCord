@@ -8,31 +8,7 @@
   height: calc(100dvh - var(--bottomNav-height));
 }
 
-.register-input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  width: 100%;
-  padding-top: 1rem;
-}
-
-.register-wrapper input {
-  display: flex;
-  color: var(--color-text);
-  background-color: transparent;
-  text-align: center;
-  border-radius: 14px;
-  border: 1px solid var(--color-primary);
-  padding: 10px 0;
-  width: 100%;
-}
-.register-wrapper input:focus {
-  outline: 2px solid var(--color-highlight-bright);
-  border: none;
-  margin: 1px;
-}
-
-#registerButtons {
+.register-buttons-container {
   display: flex;
   flex-direction: row;
   gap: 5px;

@@ -16,12 +16,12 @@
 }
 
 .nav-link {
-  padding: 0.2rem 0.2rem 0 0.2rem;
+  padding: 0.2rem 0.3rem 0 0.3rem;
   opacity: 0.6;
 }
 
 .nav-link.active {
   opacity: 1;
-  background-color: #7e64ff20;
-  border-radius: 40%;
+  background-color: var(--color-primary-rgba);
+  border-radius: 30%;
 }

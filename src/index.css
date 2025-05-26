@@ -1,5 +1,6 @@
 :root {
   --color-primary: #7e64ff;
+  --color-primary-rgba: #7e64ff20;
   --color-text: #dcdcdc;
   --color-highlight-bright: #eee;
   --color-background: #242424;
@@ -34,18 +35,18 @@
 }
 
 .logo {
-  height: 20dvh;
-  will-change: filter;
+  height: 13rem;
   filter: drop-shadow(0 0 20px var(--color-text));
   padding: 0.5rem;
 }
 
-.error {
+.error-text {
   color: red;
-  font-weight: normal;
+  padding-bottom: 0.2rem;
 }
 
 .primary-button {
+  font-size: 15px;
   font-weight: bold;
   background-color: var(--color-primary);
   border-radius: 16px;
@@ -61,6 +62,7 @@
 }
 
 .secondary-button {
+  font-size: 15px;
   font-weight: bold;
   background-color: var(--color-background-secondary);
   color: var(--color-text);
@@ -74,4 +76,27 @@
 }
 .secondary-button:hover {
   opacity: 0.9;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  padding-top: 1rem;
+}
+.input-container input {
+  display: flex;
+  color: var(--color-text);
+  background-color: transparent;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid var(--color-primary);
+  padding: 10px 0;
+  width: 100%;
+}
+.input.container input:focus {
+  outline: 2px solid var(--color-highlight-bright);
+  border: none;
+  margin: 1px;
 }
