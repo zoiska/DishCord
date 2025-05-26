@@ -95,7 +95,7 @@
   padding: 10px 0;
   width: 100%;
 }
-.input.container input:focus {
+.input-container input:focus {
   outline: 2px solid var(--color-highlight-bright);
   border: none;
   margin: 1px;
