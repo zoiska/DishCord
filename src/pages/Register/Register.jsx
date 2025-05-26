@@ -84,10 +84,10 @@ export default function Register() {
 
   return (
     <div className="register-wrapper">
-      <img src={dishcordLogo} className="register-logo" alt="DishCord logo" />
-      <h1>DishCord</h1>
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+      <h1 className="title">DishCord</h1>
 
-      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
+      <form className="register-input-container" onSubmit={handleSubmit} noValidate>
         <input
           className={`register-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
@@ -125,10 +125,12 @@ export default function Register() {
         />
         {errors.passwordVerify && <p className="error">{errors.passwordVerify}</p>}
         <div id="registerButtons">
-          <button type="button" onClick={toLogin}>
+          <button className="secondary-button" type="button" onClick={toLogin}>
             Cancel
           </button>
-          <button type="submit">Register</button>
+          <button className="primary-button" type="submit">
+            Register
+          </button>
         </div>
       </form>
     </div>

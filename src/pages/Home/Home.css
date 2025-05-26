@@ -7,19 +7,7 @@
   text-align: center;
 }
 
-.home-logo {
-  height: 20dvh;
-  will-change: filter;
-  filter: drop-shadow(0 0 20px #ffffffd0);
-}
-
-#signInButton {
-  position: absolute;
-  top: 1em;
-  left: 1em;
-  width: 7em;
-}
-
+#signInButton,
 #logoutButton {
   position: absolute;
   top: 1em;

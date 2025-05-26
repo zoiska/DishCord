@@ -85,10 +85,10 @@ export default function Login() {
 
   return (
     <div className="login-wrapper">
-      <img src={dishcordLogo} className="login-logo" alt="DishCord logo" />
-      <h1>DishCord</h1>
+      <img src={dishcordLogo} className="logo" alt="DishCord logo" />
+      <h1 className="title">DishCord</h1>
 
-      <form className="inputContainer" onSubmit={handleSubmit} noValidate>
+      <form className="login-input-container" onSubmit={handleSubmit} noValidate>
         <input
           className={`login-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
@@ -97,7 +97,7 @@ export default function Login() {
           name="username"
           required
           minLength="4"
-          placeholder="Username"
+          placeholder="Enter username"
           onChange={handleChange}
         />
         {errors.username && <p className="error">{errors.username}</p>}
@@ -109,15 +109,17 @@ export default function Login() {
           name="password"
           required
           minLength="8"
-          placeholder="Password"
+          placeholder="Enter password"
           onChange={handleChange}
         />
         {errors.password && <p className="error">{errors.password}</p>}
         <div className="loginButtons">
-          <button type="button" onClick={() => navigate("/register")}>
+          <button className="secondary-button" type="button" onClick={() => navigate("/register")}>
             Register instead
           </button>
-          <button type="submit">Login</button>
+          <button className="primary-button" type="submit">
+            Login
+          </button>
         </div>
       </form>
       <span className="guestLink" onClick={() => navigate("/")}>

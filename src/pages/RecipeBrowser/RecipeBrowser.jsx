@@ -14,7 +14,7 @@ function RecipeBrowser() {
 
   return (
     <div className="recipe-browser-wrapper">
-      <h1>Recipe Browser</h1>
+      <h1 className="title">Recipe Browser</h1>
       <form role="search">
         <input type="search" name="query" placeholder="Search..." />
       </form>
