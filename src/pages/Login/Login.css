@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60vw;
-  justify-self: center;
+  width: 80dvw;
+  margin: 0 auto;
   height: calc(100dvh - var(--bottomNav-height));
 }
 
