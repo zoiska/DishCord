@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import dishcordLogo from "../../assets/logo.png";
+import { register } from "../../services/AuthService.js";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -31,22 +32,7 @@ export default function Register() {
   };
 
   async function registerClicked() {
-    try {
-      const res = await fetch("/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: user.username, password: user.password }),
-      });
-
-      if (res.ok) {
-        navigate("/");
-      } else {
-        const error = await res.json();
-        console.error(error);
-      }
-    } catch (error) {
-      console.error("Registration error:", error);
-    }
+    await register(user, navigate);
   }
 
   const validate = () => {

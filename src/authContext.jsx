@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { checkStatus } from "./services/AuthService";
 
 const Auth = createContext();
 
@@ -8,26 +9,7 @@ export function AuthCheck({ children }) {
 
   useEffect(() => {
     const checkAuthStatus = async () => {
-      const token = localStorage.getItem("t");
-      if (token) {
-        try {
-          const res = await fetch("/auth/status", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: token,
-            },
-          });
-          if (res.ok) {
-            setIsAuthenticated(true);
-          } else {
-            setIsAuthenticated(false);
-          }
-        } catch (error) {
-          console.error("Error checking authentication status:", error);
-          setIsAuthenticated(false);
-        }
-      }
+      await checkStatus(setIsAuthenticated, setIsLoading);
       setIsLoading(false);
     };
 
