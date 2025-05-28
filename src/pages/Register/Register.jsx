@@ -85,9 +85,9 @@ export default function Register() {
   return (
     <div className="register-wrapper">
       <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-      <h1 className="title">DishCord</h1>
 
       <form className="input-container" onSubmit={handleSubmit} noValidate>
+        <h1 className="title register-header">Register</h1>
         <input
           className={`register-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
