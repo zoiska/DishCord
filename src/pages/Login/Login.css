@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80dvw;
+  width: 75dvw;
   margin: 0 auto;
   height: calc(100dvh - var(--bottomNav-height));
 }
@@ -30,4 +30,8 @@
 
 .login-input.valid {
   border-color: green;
+}
+
+.sign-in-header {
+  margin: 0 auto;
 }

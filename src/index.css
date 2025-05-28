@@ -36,8 +36,8 @@
 
 .logo {
   height: 13rem;
-  filter: drop-shadow(0 0 20px var(--color-text));
-  padding: 0.5rem;
+  filter: drop-shadow(0 0 10px var(--color-text));
+  padding-bottom: 2rem;
 }
 
 .error-text {
@@ -81,14 +81,50 @@
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.5rem;
   width: 100%;
-  padding-top: 1rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background-color: var(--color-background-secondary);
+  position: relative;
 }
+.input-container::before,
+.input-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background: conic-gradient(from var(--angle), transparent 40%, var(--color-primary));
+  animation: spin 3s linear infinite;
+  padding: 5px;
+  transform: translate(-5px, -5px);
+  z-index: -1;
+}
+.input-container::before {
+  filter: blur(25px);
+  opacity: 0.5;
+}
+@keyframes spin {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .input-container input {
   display: flex;
   color: var(--color-text);
-  background-color: transparent;
+  background-color: var(--color-background);
   text-align: center;
   border-radius: 14px;
   border: 1px solid var(--color-primary);

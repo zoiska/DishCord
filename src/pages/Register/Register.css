@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80dvw;
+  width: 75dvw;
   margin: 0 auto;
   height: calc(100dvh - var(--bottomNav-height));
 }
@@ -20,4 +20,8 @@
 
 .register-input.valid {
   border-color: green;
+}
+
+.register-header {
+  margin: 0 auto;
 }
