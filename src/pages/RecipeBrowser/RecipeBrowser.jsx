@@ -16,7 +16,7 @@ function RecipeBrowser() {
     <div className="recipe-browser-wrapper">
       <h1 className="title">Recipe Browser</h1>
       <form role="search">
-        <input type="search" name="query" placeholder="Search..." />
+        <input className="search-input" type="search" name="query" placeholder="Search..." />
       </form>
       <div className="recipe-browser">
         <RecipeTileList recipes={recipes} />
