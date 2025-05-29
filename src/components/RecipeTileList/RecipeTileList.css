@@ -14,7 +14,7 @@
   background: var(--color-background-secondary);
   border-radius: 8px;
   text-align: center;
-  height: 7rem;
+  height: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,7 +28,7 @@
 }
 
 .tile-image {
-  width: 45%;
+  width: 50%;
   height: 100%;
   object-fit: cover;
   object-position: center right;
@@ -39,21 +39,22 @@
 .tile-content {
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 50%;
   padding-left: 0.5rem;
+  align-items: flex-start;
 }
 .tile-name {
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  text-align: left;
 }
 .tile-author {
   font-size: 1rem;
 }
 
 .tile-ratings {
-  width: 20%;
-  margin-right: -1rem;
+  padding-top: 1rem;
   min-width: 60px;
 }
 .tile-rating-icons > * {

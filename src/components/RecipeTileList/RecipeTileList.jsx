@@ -25,17 +25,17 @@ const RecipeTileList = ({ recipes }) => {
               }}
             />
             <div className="tile-content">
-              <p className="tile-name">{recipe.name}</p>
-              <p className="tile-author">{"- " + recipe.author}</p>
-            </div>
-            <div className="tile-ratings">
-              <div className="tile-rating-icons">
-                <ThumbsUp color="green" size={20} />
-                <ThumbsDown color="red" size={20} />
-              </div>
-              <div className="tile-rating-values">
-                <span>{77}</span>
-                <span>{44}</span>
+              <span className="tile-name">{recipe.name}</span>
+              <span className="tile-author">{"- " + recipe.author}</span>
+              <div className="tile-ratings">
+                <div className="tile-rating-icons">
+                  <ThumbsUp color="green" size={20} />
+                  <ThumbsDown color="red" size={20} />
+                </div>
+                <div className="tile-rating-values">
+                  <span>{77}</span>
+                  <span>{44}</span>
+                </div>
               </div>
             </div>
             {recipe.imageUrls && recipe.imageUrls.length > 0 && (
