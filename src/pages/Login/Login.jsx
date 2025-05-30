@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import dishcordLogo from "../../assets/logo.png";
 import { useAuth } from "../../authContext.jsx";
+import { login } from "../../services/AuthService.js";
 
 export default function Login() {
   let { setIsAuthenticated } = useAuth();
@@ -31,32 +32,8 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  async function login() {
-    try {
-      const res = await fetch("/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem("t", data.token);
-        setIsAuthenticated(true);
-        navigate("/");
-      } else {
-        // TODO: Handle error (show UI message)
-        // "wrong password" or "user not found"
-        const error = await res.json();
-        console.error(error);
-      }
-    } catch (error) {
-      // TODO: Handle error (show UI message)
-      // "Network error" or "Server not reachable" probably
-      console.error("Login error:", error);
-    }
+  async function loginClicked() {
+    await login(user, setIsAuthenticated, navigate);
   }
 
   const validate = () => {
@@ -79,16 +56,16 @@ export default function Login() {
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      login();
+      loginClicked();
     }
   };
 
   return (
     <div className="login-wrapper">
       <img src={dishcordLogo} className="logo" alt="DishCord logo" />
-      <h1 className="title">DishCord</h1>
 
       <form className="input-container" onSubmit={handleSubmit} noValidate>
+        <h1 className="title sign-in-header">Sign In</h1>
         <input
           className={`login-input ${
             errors.username ? "invalid" : user.username.length >= 4 ? "valid" : ""
