@@ -37,7 +37,7 @@ function CreateRecepie() {
         -
       </button>
       <button id="addIngredient" className="secondary-button" onClick={addIngredient}>
-        +
+        +-
       </button>`;
 
     ingredient.appendChild(newGroup);
