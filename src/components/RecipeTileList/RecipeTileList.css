@@ -23,7 +23,7 @@
   box-shadow: 0 0 2rem var(--color-primary-rgba) inset;
   position: relative;
   scale: 0.7;
-  transition: scale 0.3s ease-out;
+  transition: scale 0.2s ease-out;
 }
 
 .tile:hover {
@@ -40,6 +40,9 @@
 }
 
 .tile-content {
+  position: relative;
+  justify-content: flex-start;
+  height: 100%;
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -47,16 +50,33 @@
   align-items: flex-start;
 }
 .tile-name {
+  position: absolute;
+  top: 0.3rem;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: left;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 .tile-author {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 5.5rem;
   font-size: 1rem;
+  white-space: nowrap;
+  z-index: 2;
 }
 
 .tile-ratings {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.3rem;
   padding-top: 1rem;
   min-width: 60px;
 }

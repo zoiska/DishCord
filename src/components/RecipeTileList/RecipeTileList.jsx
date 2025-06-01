@@ -20,8 +20,6 @@ const RecipeTileList = ({ recipes }) => {
         });
       },
       {
-        root: null,
-        rootMargin: "0px",
         threshold: Array.from({ length: 11 }, (_, i) => i / 10),
       }
     );
@@ -55,7 +53,7 @@ const RecipeTileList = ({ recipes }) => {
             />
             <div className="tile-content">
               <span className="tile-name">{recipe.name}</span>
-              <span className="tile-author">{"- " + recipe.author}</span>
+              <span className="tile-author">{"by " + recipe.author}</span>
               <div className="tile-ratings">
                 <div className="tile-rating-icons">
                   <ThumbsUp color="green" size={20} />
