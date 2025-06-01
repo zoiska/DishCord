@@ -15,27 +15,22 @@ const RecipeTileList = ({ recipes }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("tile-animate");
-            observer.unobserve(entry.target);
-          }
+          const ratio = entry.intersectionRatio;
+          entry.target.style.scale = 0.7 + ratio * 0.3;
         });
       },
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.1,
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10),
       }
     );
 
     const currentRefs = tileRefs.current;
-    currentRefs.forEach((tile) => {
-      if (tile) observer.observe(tile);
-    });
+    currentRefs.forEach((tile) => tile && observer.observe(tile));
+
     return () => {
-      currentRefs.forEach((tile) => {
-        if (tile) observer.unobserve(tile);
-      });
+      currentRefs.forEach((tile) => tile && observer.unobserve(tile));
     };
   }, [recipes]);
 

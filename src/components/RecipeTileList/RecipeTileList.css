@@ -22,13 +22,8 @@
   flex-direction: row;
   box-shadow: 0 0 2rem var(--color-primary-rgba) inset;
   position: relative;
-
-  scale: 0.5;
-  transition: scale 0.4s ease-out;
-}
-
-.tile.tile-animate {
-  scale: 1;
+  scale: 0.7;
+  transition: scale 0.3s ease-out;
 }
 
 .tile:hover {
