@@ -1,20 +1,54 @@
 import { ThumbsUp, ThumbsDown, Bookmark } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 
 const RecipeTileList = ({ recipes }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const tileRefs = useRef([]);
 
   const handleBookmarkClick = (recipeId) => {
     // handle the bookmark click
     console.log(`Bookmark clicked for recipe ID: ${recipeId}`);
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("tile-animate");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    const currentRefs = tileRefs.current;
+    currentRefs.forEach((tile) => {
+      if (tile) observer.observe(tile);
+    });
+    return () => {
+      currentRefs.forEach((tile) => {
+        if (tile) observer.unobserve(tile);
+      });
+    };
+  }, [recipes]);
+
   return (
     <>
       <div className="tile-list">
         {recipes.map((recipe) => (
-          <div key={recipe.id} className="tile" onClick={() => setSelectedRecipe(recipe)}>
+          <div
+            key={recipe.id}
+            className="tile"
+            ref={(el) => (tileRefs.current[recipe.id] = el)}
+            onClick={() => setSelectedRecipe(recipe)}
+          >
             <Bookmark
               className="bookmark"
               color="yellow"
