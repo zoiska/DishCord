@@ -135,7 +135,7 @@ function CreateRecipe() {
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
-            <h2>Are you sure you want to abbreaken?</h2>
+            <h2>Are you sure you want to abbreaken??</h2>
             <div className="popup-buttons">
               <button className="popup-cancel-buttons secondary-button" onClick={handleNo}>
                 No
