@@ -1,12 +1,9 @@
-/* ToDo:  - clean up
-          - image upload button
-*/
-
 .create-recipe-header {
   display: flex;
   align-items: center;
   position: relative;
-  height: 70px;
+  width: 100dvw;
+  height: 5dvh;
 }
 
 .create-recipe-title {
@@ -19,111 +16,155 @@
   margin: 50px;
 }
 
-.form-group-ingridients {
-  display: flex;
-  flex-direction: column;
-  margin: 50px;
-}
-
-#recipe-title {
+.recipe-title {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
   padding: 10px;
   margin: 5px 0px 0px 0px;
+  height: 1.5dvh;
 }
 
-.group-ingridients {
+.group-ingredients {
   display: flex;
   flex-direction: row;
   column-gap: 10px;
   margin: 5px 0px 0px 0px;
 }
 
-#recipe-ingridients {
+.recipe-ingredients-data {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
   padding: 10px;
-  width: 50%;
+  width: 50dvw;
+  height: 1.5dvh;
 }
 
-#recipe-ingridients-amount {
-  color: var(--color-text);
-  background-color: transparent;
-  border-radius: 14px;
-  border: 1px solid var(--color-primary);
-  padding: 10px;
-  width: 40%;
+.ingredients-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 
-#addIngridient {
-  width: 5%;
+.addingredient {
+  width: 7dvw;
+  height: 3dvh;
   cursor: pointer;
 }
 
-#removeIngridient {
-  width: 5%;
+.removeingredient {
+  width: 7dvw;
+  height: 3dvh;
   cursor: pointer;
 }
 
-#recipe-instructions {
+.recipe-instructions {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
   padding: 10px;
   text-align: left;
-  height: 300px;
+  height: 30dvh;
   resize: none;
   overflow: auto;
-  scrollbar-width: none; /* None */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin: 5px 0px 0px 0px;
 }
 
-#recipe-instructions::-webkit-scrollbar {
+.recipe-instructions::-webkit-scrollbar {
   display: none; /* Safari, Chrome */
 }
 
-#recipe-instructions::placeholder {
+.recipe-instructions::placeholder {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-#create {
-  position: absolute;
-  bottom: 50px;
-  right: 50px;
-  width: 12%;
-  height: 4%;
-  cursor: pointer;
+.recipe-image-button {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 
-#cancel {
-  position: absolute;
-  left: 50px;
-  top: 20px;
-  width: 10%;
-  height: 60%;
-  cursor: pointer;
+.recipe-image {
+  width: 7dvw;
+  height: 3dvh;
+  padding: 10px;
+  border-radius: 14px;
+  margin: 5px 0px 0px 0px;
 }
 
 .image-preview {
-  height: 180px;
+  height: 15dvh;
   border: 1px solid var(--color-primary);
   border-radius: 14px;
   margin: 5px 0px 0px 0px;
   display: flex;
+  flex-wrap: wrap;
 }
 
-#recipe-image {
-  width: 30%;
-  padding: 10px;
-  color: var(--color-text);
-  background-color: transparent;
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: var(--color-background-secondary);
   border: 1px solid var(--color-primary);
   border-radius: 14px;
-  margin: 5px 0px 0px 0px;
+  color: var(--color-text);
+  padding: 20px;
+  text-align: center;
+  width: 40dvw;
+  height: 10dvh;
+}
+
+.popup-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.popup-cancel-buttons {
+  margin: 10px 0px 0px 0px;
+}
+
+.bottom-nav-create-recipe {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100dvw;
+  background: #1a1a1a;
+  border-top: 1px solid #303030;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.3rem 0;
+  z-index: 10;
+}
+
+.create-button {
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+}
+
+.cancel-button {
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
 }

@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "./authContext.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
-import CreateRecipeButton from "./components/CreateRecipeButton/CreateRecipeButton.jsx"; // Import the CreateRecepieButton component
 import CreateRecipe from "./pages/CreateRecipe/CreateRecipe.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
@@ -40,8 +39,6 @@ function App() {
         />
         <Route path="/create-recipe" element={<CreateRecipe />} />
       </Routes>
-
-      {!hideNav && <CreateRecipeButton />}
 
       {!hideNav && <BottomNav />}
     </div>

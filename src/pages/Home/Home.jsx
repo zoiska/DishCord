@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
 import dishcordLogo from "../../assets/logo.png";
 import { useAuth } from "../../authContext.jsx";
 
@@ -35,6 +36,7 @@ function Home() {
         <img src={dishcordLogo} className="logo" alt="DishCord logo" />
         <h1 className="title">DishCord</h1>
       </div>
+      <CreateRecipeButton />
     </>
   );
 }
