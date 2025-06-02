@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipeButton.css";
 
@@ -9,8 +10,8 @@ function CreateRecipeButton() {
   }
 
   return (
-    <button id="createRecipeButton" className="secondary-button" onClick={toCreateRecipe}>
-      +
+    <button className="create-recipe-button secondary-button" onClick={toCreateRecipe}>
+      <Plus absoluteStrokeWidth={1} size={32} color="var(--color-text)" />
     </button>
   );
 }

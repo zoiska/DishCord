@@ -5,64 +5,32 @@ import "./CreateRecipe.css";
 function CreateRecipe() {
   const navigate = useNavigate();
 
-  const [ingredients, setIngredients] = useState(1);
+  const [ingredients, setIngredients] = useState([{ name: "", amount: "" }]);
 
-  function cancel() {
+  const handleIngredientChange = (index, field, value) => {
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index][field] = value;
+    setIngredients(updatedIngredients);
+  };
+
+  const cancel = () => {
     navigate("/");
-  }
+  };
 
-  function create() {
+  const create = () => {
+    // post recipe to backend
     navigate("/");
-  }
+  };
 
-  function addIngridient() {
-    setIngredients(ingredients + 1);
-    const ingredient = document.getElementsByClassName("form-group-ingridients");
-    const newGroup = document.createElement("div");
-    newGroup.className = "group-ingridients";
+  const addIngridient = (e) => {
+    e.preventDefault();
+    setIngredients([...ingredients, { name: "", amount: "" }]);
+  };
 
-    newGroup.innerHTML = `
-      <input
-        id="recipe-ingridients"
-        className="recipe-ingridients"
-        type="text"
-        placeholder="Ingridient"
-        minLength="1"
-        required
-      />
-      <input
-        id="recipe-ingridients-amount"
-        className="recipe-ingridients-amount"
-        type="text"
-        placeholder="Amount"
-        minLength="1"
-        required
-      />
-      <input
-        id="removeIngridient"
-        className="secondary-button"
-        type="button"
-        value="-"	
-        onClick={removeIngridient}
-      ></input>
-      <input
-        id="addIngridient"
-        className="secondary-button"
-        type="button"
-        value="+"
-        onClick={addIngridient}
-      ></input>`;
-
-    ingredient.appendChild(newGroup);
-  }
-
-  function removeIngridient() {
-    if (ingredients > 1) {
-      setIngredients(ingredients - 1);
-    } else {
-      console.log("At least one ingredient is required.");
-    }
-  }
+  const removeIngridient = () => {
+    if (ingredients.length <= 1) return;
+    setIngredients(ingredients.slice(0, -1));
+  };
 
   function imagePreview() {}
 
@@ -76,7 +44,7 @@ function CreateRecipe() {
       </div>
 
       <div className="create-recipe-body">
-        <form className="create-recipe-form" onSubmit={create}>
+        <form className="create-recipe-form">
           <div className="form-group">
             <label htmlFor="recipe-title">Recipe Title</label>
             <input
@@ -91,38 +59,44 @@ function CreateRecipe() {
 
           <div className="form-group-ingridients">
             <label htmlFor="recipe-ingridients">Ingredients</label>
-            <div className="group-ingridients">
-              <input
-                id="recipe-ingridients"
-                className="recipe-ingridients"
-                type="text"
-                placeholder="Ingridient"
-                minLength="1"
-                required
-              />
-              <input
-                id="recipe-ingridients-amount"
-                className="recipe-ingridients-amount"
-                type="text"
-                placeholder="Amount"
-                minLength="1"
-                required
-              />
-              <input
-                id="removeIngridient"
-                className="secondary-button"
-                type="button"
-                value="-"
-                onClick={removeIngridient}
-              ></input>
-              <input
-                id="addIngridient"
-                className="secondary-button"
-                type="button"
-                value="+"
-                onClick={addIngridient}
-              ></input>
-            </div>
+            {ingredients.map((ingredient, index) => (
+              <div className="group-ingridients" key={index}>
+                <input
+                  id="recipe-ingridients"
+                  className="recipe-ingridients"
+                  type="text"
+                  placeholder="Ingridient"
+                  minLength="1"
+                  required
+                  value={ingredient.name}
+                  onChange={(e) => {
+                    handleIngredientChange(index, "name", e.target.value);
+                  }}
+                />
+                <input
+                  id="recipe-ingridients-amount"
+                  className="recipe-ingridients-amount"
+                  type="text"
+                  placeholder="Amount"
+                  minLength="1"
+                  required
+                />
+              </div>
+            ))}
+            <input
+              id="removeIngridient"
+              className="secondary-button"
+              type="button"
+              value="-"
+              onClick={removeIngridient}
+            ></input>
+            <input
+              id="addIngridient"
+              className="secondary-button"
+              type="button"
+              value="+"
+              onClick={addIngridient}
+            ></input>
           </div>
 
           <div className="form-group">
@@ -142,7 +116,7 @@ function CreateRecipe() {
             <div className="image-preview"></div>
           </div>
 
-          <button id="create" className="primary-button" type="submit">
+          <button id="create" className="primary-button" type="button" onClick={create}>
             create
           </button>
         </form>
