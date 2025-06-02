@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "./authContext.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
-import CreateRecepieButton from "./components/CreateRecepieButton/CreateRecepieButton.jsx"; // Import the CreateRecepieButton component
+import CreateRecipeButton from "./components/CreateRecipeButton/CreateRecipeButton.jsx"; // Import the CreateRecepieButton component
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import RecipeBrowser from "./pages/RecipeBrowser/RecipeBrowser.jsx";
 import Register from "./pages/Register/Register.jsx";
-import CreateRecepie from "./pages/CreateRecepie/CreateRecepie.jsx"; // Import the CreateRecepie page
+import CreateRecipe from "./pages/CreateRecipe/CreateRecipe.jsx"; // Import the CreateRecepie page
 import "./App.css";
 
 function App() {
@@ -38,10 +38,10 @@ function App() {
             )
           }
         />
-        <Route path="/create-recipe" element={<CreateRecepie />} />
+        <Route path="/create-recipe" element={<CreateRecipe />} />
       </Routes>
 
-      {!hideNav && <CreateRecepieButton />}
+      {!hideNav && <CreateRecipeButton />}
 
       {!hideNav && <BottomNav />}
     </div>

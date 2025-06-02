@@ -1,3 +1,7 @@
+/* ToDo:  - clean up
+          - image upload button
+*/
+
 .create-recipe-header {
   display: flex;
   align-items: center;
@@ -15,28 +19,29 @@
   margin: 50px;
 }
 
+.form-group-ingridients {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
 #recipe-title {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
   padding: 10px;
-  width: 100%;
+  margin: 5px 0px 0px 0px;
 }
 
-#group-ingredients {
+.group-ingridients {
   display: flex;
   flex-direction: row;
   column-gap: 10px;
+  margin: 5px 0px 0px 0px;
 }
 
-.group-ingredients {
-  display: flex;
-  flex-direction: row;
-  column-gap: 10px;
-}
-
-#recipe-ingredients {
+#recipe-ingridients {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
@@ -45,7 +50,7 @@
   width: 50%;
 }
 
-#recipe-ingredients-amount {
+#recipe-ingridients-amount {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
@@ -54,13 +59,13 @@
   width: 40%;
 }
 
-#addIngredient {
-  width: 10%;
+#addIngridient {
+  width: 5%;
   cursor: pointer;
 }
 
-#removeIngredient {
-  width: 10%;
+#removeIngridient {
+  width: 5%;
   cursor: pointer;
 }
 
@@ -71,32 +76,54 @@
   border: 1px solid var(--color-primary);
   padding: 10px;
   text-align: left;
-  width: 100%;
   height: 300px;
   resize: none;
   overflow: auto;
   scrollbar-width: none; /* None */
   -ms-overflow-style: none; /* IE/Edge */
+  margin: 5px 0px 0px 0px;
 }
 
 #recipe-instructions::-webkit-scrollbar {
   display: none; /* Safari, Chrome */
 }
 
+#recipe-instructions::placeholder {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 #create {
   position: absolute;
   bottom: 50px;
   right: 50px;
-  width: 120px;
-  height: 50px;
+  width: 12%;
+  height: 4%;
   cursor: pointer;
 }
 
 #cancel {
   position: absolute;
-  left: 20px;
+  left: 50px;
   top: 20px;
-  width: 120px;
-  height: 50px;
+  width: 10%;
+  height: 60%;
   cursor: pointer;
+}
+
+.image-preview {
+  height: 180px;
+  border: 1px solid var(--color-primary);
+  border-radius: 14px;
+  margin: 5px 0px 0px 0px;
+  display: flex;
+}
+
+#recipe-image {
+  width: 30%;
+  padding: 10px;
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  border-radius: 14px;
+  margin: 5px 0px 0px 0px;
 }
