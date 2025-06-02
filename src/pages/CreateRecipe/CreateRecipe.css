@@ -48,18 +48,17 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
-}
-
-.addingredient {
-  width: 7dvw;
   height: 3dvh;
-  cursor: pointer;
 }
 
+.addingredient,
 .removeingredient {
   width: 7dvw;
-  height: 3dvh;
+  height: 100%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .recipe-instructions {
@@ -85,19 +84,22 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.recipe-image-button {
+.recipe-image {
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
 }
 
-.recipe-image {
+.recipe-image-button {
   width: 7dvw;
   height: 3dvh;
   padding: 10px;
   border-radius: 14px;
   margin: 5px 0px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-preview {
@@ -128,15 +130,18 @@
   color: var(--color-text);
   padding: 20px;
   text-align: center;
-  width: 40dvw;
-  height: 10dvh;
+  width: 50dvw;
+  height: 15dvh;
+  display: flex;
+  flex-direction: column;
+  font-size: 3dvh;
+  font-weight: bold;
+  justify-content: space-around;
 }
 
 .popup-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   gap: 10px;
 }
 

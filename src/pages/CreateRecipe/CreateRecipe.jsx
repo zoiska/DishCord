@@ -72,14 +72,14 @@ function CreateRecipe() {
                 type="button"
                 onClick={removeingredient}
               >
-                <Minus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
+                -
               </button>
               <button
                 className="addingredient secondary-button"
                 type="button"
                 onClick={addingredient}
               >
-                <Plus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
+                +
               </button>
             </div>
             {ingredients.map((ingredient, index) => (
@@ -121,9 +121,9 @@ function CreateRecipe() {
           </div>
 
           <div className="form-group">
-            <div className="recipe-image-button">
+            <div className="recipe-image">
               <label htmlFor="recipe-image">Images</label>
-              <button className="recipe-image secondary-button" onClick={imagePreview}>
+              <button className="recipe-image-button secondary-button" onClick={imagePreview}>
                 <ArchiveRestore absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
               </button>
             </div>
@@ -135,7 +135,7 @@ function CreateRecipe() {
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
-            <h2>Are you sure you want to abbreaken??</h2>
+            Are you sure you want to cancel?
             <div className="popup-buttons">
               <button className="popup-cancel-buttons secondary-button" onClick={handleNo}>
                 No
