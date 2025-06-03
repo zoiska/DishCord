@@ -1,4 +1,4 @@
-import { ThumbsUp, ThumbsDown, Bookmark } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 
@@ -9,6 +9,10 @@ const RecipeTileList = ({ recipes }) => {
   const handleBookmarkClick = (recipeId) => {
     // handle the bookmark click
     console.log(`Bookmark clicked for recipe ID: ${recipeId}`);
+  };
+
+  const test = () => {
+    console.log("test");
   };
 
   useEffect(() => {
@@ -96,12 +100,22 @@ const RecipeTileList = ({ recipes }) => {
               <h3>Zubereitung</h3>
               <p>{selectedRecipe.preparation}</p>
             </article>
-
-            <button
-              className="secondary-button floating-close-button"
-              onClick={() => setSelectedRecipe(null)}
-            >
-              Close
+          </div>
+          <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
+            <button className="footer-button" onClick={() => test()}>
+              <ThumbsUp size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <ThumbsDown size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <Bookmark size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <MessageCircle size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => setSelectedRecipe(null)}>
+              <X size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
             </button>
           </div>
         </div>
