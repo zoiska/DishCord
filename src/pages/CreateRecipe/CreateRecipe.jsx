@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Plus, Minus, ArrowUpFromLine, X, ArchiveRestore } from "lucide-react";
+import { useState, useRef } from "react";
+import { ArrowUpFromLine, X, ArchiveRestore } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipe.css";
 
@@ -8,6 +8,9 @@ function CreateRecipe() {
 
   const [ingredients, setIngredients] = useState([{ name: "", amount: "" }]);
   const [showPopup, setShowPopUp] = useState(false);
+  const [imagePreview, setImagePreview] = useState([]);
+
+  const fileInputRef = useRef(null);
 
   const create = () => {
     // post recipe to backend
@@ -43,7 +46,13 @@ function CreateRecipe() {
     setIngredients(ingredients.slice(0, -1));
   };
 
-  function imagePreview() {}
+  const handleImageButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleImageChange = () => {
+    //validate if the file is an image
+  };
 
   return (
     <div>
@@ -123,9 +132,21 @@ function CreateRecipe() {
           <div className="form-group">
             <div className="recipe-image">
               <label htmlFor="recipe-image">Images</label>
-              <button className="recipe-image-button secondary-button" onClick={imagePreview}>
+              <button
+                className="recipe-image-upload-button secondary-button"
+                type="button"
+                onClick={handleImageButtonClick}
+              >
                 <ArchiveRestore absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
               </button>
+              <input
+                className="upload-button"
+                type="file"
+                multiple
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleImageChange}
+              />
             </div>
             <div className="image-preview"></div>
           </div>

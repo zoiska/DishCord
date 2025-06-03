@@ -91,7 +91,7 @@
   align-items: center;
 }
 
-.recipe-image-button {
+.recipe-image-upload-button {
   width: 7dvw;
   height: 3dvh;
   padding: 10px;
@@ -172,4 +172,8 @@
   cursor: pointer;
   background: transparent;
   border: transparent;
+}
+
+.upload-button {
+  display: none;
 }
