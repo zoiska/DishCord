@@ -1,20 +1,51 @@
-import { ThumbsUp, ThumbsDown, Bookmark } from "lucide-react";
-import { useState } from "react";
+import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 
 const RecipeTileList = ({ recipes }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const tileRefs = useRef([]);
 
   const handleBookmarkClick = (recipeId) => {
     // handle the bookmark click
     console.log(`Bookmark clicked for recipe ID: ${recipeId}`);
   };
 
+  const test = () => {
+    console.log("test");
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const ratio = entry.intersectionRatio;
+          entry.target.style.scale = 0.7 + ratio * 0.3;
+        });
+      },
+      {
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10),
+      }
+    );
+
+    const currentRefs = tileRefs.current;
+    currentRefs.forEach((tile) => tile && observer.observe(tile));
+
+    return () => {
+      currentRefs.forEach((tile) => tile && observer.unobserve(tile));
+    };
+  }, [recipes]);
+
   return (
     <>
       <div className="tile-list">
         {recipes.map((recipe) => (
-          <div key={recipe.id} className="tile" onClick={() => setSelectedRecipe(recipe)}>
+          <div
+            key={recipe.id}
+            className="tile"
+            ref={(el) => (tileRefs.current[recipe.id] = el)}
+            onClick={() => setSelectedRecipe(recipe)}
+          >
             <Bookmark
               className="bookmark"
               color="yellow"
@@ -25,17 +56,17 @@ const RecipeTileList = ({ recipes }) => {
               }}
             />
             <div className="tile-content">
-              <p className="tile-name">{recipe.name}</p>
-              <p className="tile-author">{"- " + recipe.author}</p>
-            </div>
-            <div className="tile-ratings">
-              <div className="tile-rating-icons">
-                <ThumbsUp color="green" size={20} />
-                <ThumbsDown color="red" size={20} />
-              </div>
-              <div className="tile-rating-values">
-                <span>{77}</span>
-                <span>{44}</span>
+              <span className="tile-name">{recipe.name}</span>
+              <span className="tile-author">{"by " + recipe.author}</span>
+              <div className="tile-ratings">
+                <div className="tile-rating-icons">
+                  <ThumbsUp color="green" size={20} />
+                  <ThumbsDown color="red" size={20} />
+                </div>
+                <div className="tile-rating-values">
+                  <span>{77}</span>
+                  <span>{44}</span>
+                </div>
               </div>
             </div>
             {recipe.imageUrls && recipe.imageUrls.length > 0 && (
@@ -69,12 +100,22 @@ const RecipeTileList = ({ recipes }) => {
               <h3>Zubereitung</h3>
               <p>{selectedRecipe.preparation}</p>
             </article>
-
-            <button
-              className="secondary-button floating-close-button"
-              onClick={() => setSelectedRecipe(null)}
-            >
-              Close
+          </div>
+          <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
+            <button className="footer-button" onClick={() => test()}>
+              <ThumbsUp size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <ThumbsDown size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <Bookmark size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => test()}>
+              <MessageCircle size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
+            </button>
+            <button className="footer-button" onClick={() => setSelectedRecipe(null)}>
+              <X size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
             </button>
           </div>
         </div>

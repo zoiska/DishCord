@@ -50,7 +50,16 @@ function CreateRecipe() {
     fileInputRef.current.click();
   };
 
-  const imageValdation = (file) => {};
+  const imageValdation = (file) => {
+    console.log(file);
+    const fileType = file.name.split(".").pop().toLowerCase();
+    if (fileType === "jpg" || fileType === "jpeg" || fileType === "png" || fileType === "gif") {
+      return true;
+    } else {
+      alert("Please upload a valid image file (jpg, jpeg, png, gif).");
+      return false;
+    }
+  };
 
   const handleImageChange = () => {};
 
