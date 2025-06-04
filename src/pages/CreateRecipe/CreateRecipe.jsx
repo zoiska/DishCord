@@ -8,7 +8,7 @@ function CreateRecipe() {
 
   const [ingredients, setIngredients] = useState([{ name: "", amount: "" }]);
   const [showPopup, setShowPopUp] = useState(false);
-  const [imagePreview, setImagePreview] = useState([]);
+  const [imagePreview, setImagePreview] = useState([{ url: "", index: "" }]);
 
   const fileInputRef = useRef(null);
 
@@ -50,9 +50,9 @@ function CreateRecipe() {
     fileInputRef.current.click();
   };
 
-  const handleImageChange = () => {
-    //validate if the file is an image
-  };
+  const imageValdation = (file) => {};
+
+  const handleImageChange = () => {};
 
   return (
     <div>
