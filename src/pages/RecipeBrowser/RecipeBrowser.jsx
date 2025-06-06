@@ -13,9 +13,9 @@ function RecipeBrowser() {
     });
   }, []);
 
-  const handleSearch = (event) => {
+  const handleInput = (event) => {
     event.preventDefault();
-    const query = event.target.elements.query.value;
+    const query = event.target.value;
     searchRecipes(query).then((r) => {
       setRecipes(r);
     });
@@ -24,8 +24,14 @@ function RecipeBrowser() {
   return (
     <div className="recipe-browser-wrapper">
       <h1 className="title">Recipe Browser</h1>
-      <form role="search" onSubmit={handleSearch} className="recipe-search-form">
-        <input className="search-input" type="search" name="query" placeholder="Search..." />
+      <form role="search" className="recipe-search-form">
+        <input
+          className="search-input"
+          type="search"
+          name="query"
+          placeholder="Search..."
+          onInput={handleInput}
+        />
         <button type="submit" className="recipe-search-button">
           <Search size={30} absoluteStrokeWidth={1} color="var(--color-primary)" />
         </button>
