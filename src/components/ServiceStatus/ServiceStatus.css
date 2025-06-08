@@ -1,24 +1,20 @@
 .service-status {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
 
-.server-status,
-.database-status {
+.server-status {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
 }
 
-.server-icon,
-.database-icon {
+.server-icon {
   color: green;
 }
 
-.server-off-icon,
-.database-off-icon {
+.server-off-icon {
   position: relative;
   color: red;
 }
