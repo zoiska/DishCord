@@ -4,7 +4,7 @@ label {
 
 input[type="text"],
 textarea {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .create-recipe-wrapper {
@@ -43,24 +43,34 @@ textarea {
   border: 1px solid var(--color-primary);
   padding: 0.5rem;
   height: 1.3rem;
-  width: 80dvw;
 }
 
 .group-ingredients {
   display: flex;
   flex-direction: row;
-  width: 80dvw;
+  gap: 0.5rem;
 }
 
-.recipe-ingredients-data {
+.recipe-ingredients-amount {
   color: var(--color-text);
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
   height: 1.3rem;
+  width: 50%;
   padding: 0.5rem;
   margin: 0.3rem 0 0 0;
-  gap: 0.5rem;
+}
+
+.recipe-ingredients-name {
+  color: var(--color-text);
+  background-color: transparent;
+  border-radius: 14px;
+  border: 1px solid var(--color-primary);
+  height: 1.3rem;
+  width: 50%;
+  padding: 0.5rem;
+  margin: 0.3rem 0 0 0;
 }
 
 .ingredients-buttons {
@@ -72,8 +82,8 @@ textarea {
 
 .addingredient,
 .removeingredient {
-  width: 15dvw;
   height: 5dvh;
+  width: 8dvh;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -88,7 +98,6 @@ textarea {
   padding: 0.5rem;
   text-align: left;
   height: 30dvh;
-  width: 80dvw;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   resize: none;
   overflow: auto;
@@ -112,8 +121,8 @@ textarea {
 }
 
 .recipe-image-upload-button {
-  width: 15dvw;
   height: 5dvh;
+  width: 8dvh;
   padding: 0.7rem;
   border-radius: 14px;
   display: flex;
@@ -124,21 +133,12 @@ textarea {
 .image-preview {
   margin: 0.3rem 0 0 0;
   height: 15dvh;
-  width: 80dvw;
-  padding: 0.5rem;
-  border: 1px solid var(--color-primary);
+
   border-radius: 14px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   gap: 0.3rem;
-}
-
-.image-preview::-webkit-scrollbar {
-  display: none;
 }
 
 .image-preview-item {
@@ -146,7 +146,7 @@ textarea {
   align-items: center;
   justify-content: center;
   width: calc(100% / 3 - 0.2rem);
-  height: 15dvh;
+  height: 18dvh;
 }
 
 .image-preview-img {

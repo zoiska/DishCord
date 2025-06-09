@@ -63,7 +63,7 @@ function CreateRecipe() {
       setImages(validImages);
 
       setShowImagePopUp(true);
-      e.target.value = ""; // Clear the input
+      e.target.value = "";
       previews.length = 0;
     }
 
@@ -113,7 +113,7 @@ function CreateRecipe() {
               {ingredients.map((ingredient, index) => (
                 <div className="group-ingredients" key={index}>
                   <input
-                    className="recipe-ingredients-data"
+                    className="recipe-ingredients-name"
                     type="text"
                     placeholder="Ingredient"
                     minLength="1"
@@ -124,7 +124,7 @@ function CreateRecipe() {
                     }}
                   />
                   <input
-                    className="recipe-ingredients-data"
+                    className="recipe-ingredients-amount"
                     type="text"
                     placeholder="Amount"
                     minLength="1"
