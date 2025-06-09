@@ -1,0 +1,20 @@
+.service-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.server-status {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.server-icon {
+  color: green;
+}
+
+.server-off-icon {
+  position: relative;
+  color: red;
+}

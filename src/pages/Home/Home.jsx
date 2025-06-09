@@ -3,6 +3,7 @@ import "./Home.css";
 import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
 import dishcordLogo from "../../assets/logo.png";
 import { useAuth } from "../../authContext.jsx";
+import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function Home() {
       <div className="home-wrapper">
         <img src={dishcordLogo} className="logo" alt="DishCord logo" />
         <h1 className="title">DishCord</h1>
+        <ServiceStatus />
       </div>
       <CreateRecipeButton />
     </>
