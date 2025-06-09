@@ -41,8 +41,8 @@ textarea {
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
-  padding: 0.6rem;
-  height: 1.2rem;
+  padding: 0.5rem;
+  height: 1.3rem;
   width: 80dvw;
 }
 
@@ -57,8 +57,8 @@ textarea {
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
-  height: 1.2rem;
-  padding: 0.6rem;
+  height: 1.3rem;
+  padding: 0.5rem;
   margin: 0.3rem 0 0 0;
   gap: 0.5rem;
 }
@@ -85,7 +85,7 @@ textarea {
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
-  padding: 0.7rem;
+  padding: 0.5rem;
   text-align: left;
   height: 30dvh;
   width: 80dvw;
@@ -97,7 +97,7 @@ textarea {
 }
 
 .recipe-instructions::-webkit-scrollbar {
-  display: none; /* Safari, Chrome */
+  display: none;
 }
 
 .recipe-instructions::placeholder {
@@ -125,11 +125,34 @@ textarea {
   margin: 0.3rem 0 0 0;
   height: 15dvh;
   width: 80dvw;
-  padding: 0.7rem;
+  padding: 0.5rem;
   border: 1px solid var(--color-primary);
   border-radius: 14px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 0.3rem;
+}
+
+.image-preview::-webkit-scrollbar {
+  display: none;
+}
+
+.image-preview-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 3 - 0.2rem);
+  height: 15dvh;
+}
+
+.image-preview-img {
+  border-radius: 14px;
+  width: 100%;
+  height: 100%;
 }
 
 .popup-overlay {

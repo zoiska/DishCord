@@ -8,7 +8,9 @@ function CreateRecipe() {
 
   const [ingredients, setIngredients] = useState([{ name: "", amount: "" }]);
   const [showPopup, setShowPopUp] = useState(false);
-  const [imagePreview, setImagePreview] = useState([{ url: "", index: "" }]);
+  const [showImagePopup, setShowImagePopUp] = useState(false);
+  const [images, setImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
 
   const fileInputRef = useRef(null);
 
@@ -28,6 +30,10 @@ function CreateRecipe() {
   const handleYes = () => {
     navigate("/");
     setShowPopUp(false);
+  };
+
+  const handleImagePopUpOk = () => {
+    setShowImagePopUp(false);
   };
 
   const handleIngredientChange = (index, field, value) => {
@@ -50,18 +56,23 @@ function CreateRecipe() {
     fileInputRef.current.click();
   };
 
-  const imageValdation = (file) => {
-    console.log(file);
-    const fileType = file.name.split(".").pop().toLowerCase();
-    if (fileType === "jpg" || fileType === "jpeg" || fileType === "png" || fileType === "gif") {
-      return true;
-    } else {
-      alert("Please upload a valid image file (jpg, jpeg, png, gif).");
-      return false;
-    }
-  };
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    const validImages = files.filter((file) => file.type.startsWith("image/"));
+    if (validImages.length !== files.length) {
+      setImages(validImages);
 
-  const handleImageChange = () => {};
+      setShowImagePopUp(true);
+      e.target.value = ""; // Clear the input
+      previews.length = 0;
+    }
+
+    const previewUrls = validImages.map((file) => ({
+      name: file.name,
+      url: URL.createObjectURL(file),
+    }));
+    setPreviews(previewUrls);
+  };
 
   return (
     <>
@@ -156,7 +167,15 @@ function CreateRecipe() {
                   onChange={handleImageChange}
                 />
               </div>
-              <div className="image-preview"></div>
+              {previews.length > 0 && (
+                <div className="image-preview">
+                  {previews.map((preview, index) => (
+                    <div className="image-preview-item" key={index}>
+                      <img src={preview.url} alt={preview.name} className="image-preview-img" />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
         </div>
@@ -171,6 +190,22 @@ function CreateRecipe() {
                 </button>
                 <button className="popup-cancel-buttons primary-button" onClick={handleYes}>
                   Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showImagePopup && (
+          <div className="popup-overlay">
+            <div className="popup">
+              Files will be deleted. Please select only image files.
+              <div className="popup-buttons">
+                <button
+                  className="popup-cancel-buttons primary-button"
+                  onClick={handleImagePopUpOk}
+                >
+                  Ok
                 </button>
               </div>
             </div>
