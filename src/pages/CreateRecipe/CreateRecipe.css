@@ -133,7 +133,6 @@ textarea {
 .image-preview {
   margin: 0.3rem 0 0 0;
   height: 15dvh;
-
   border-radius: 14px;
   display: flex;
   flex-direction: row;
@@ -153,6 +152,18 @@ textarea {
   border-radius: 14px;
   width: 100%;
   height: 100%;
+}
+
+.add-more-images {
+  width: calc(100% / 3 - 0.2rem);
+}
+
+.add-more-images-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 18dvh;
 }
 
 .popup-overlay {
@@ -178,7 +189,7 @@ textarea {
   height: 20dvh;
   display: flex;
   flex-direction: column;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   justify-content: space-around;
 }

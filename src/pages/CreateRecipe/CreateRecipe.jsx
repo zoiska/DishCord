@@ -1,4 +1,4 @@
-import { ArrowUpFromLine, X, ArchiveRestore } from "lucide-react";
+import { ArrowUpFromLine, X, ArchiveRestore, Plus } from "lucide-react";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipe.css";
@@ -58,20 +58,30 @@ function CreateRecipe() {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const validImages = files.filter((file) => file.type.startsWith("image/"));
-    if (validImages.length !== files.length) {
-      setImages(validImages);
-
+    const newImages = files.filter((file) => file.type.startsWith("image/"));
+    if (newImages.length !== files.length) {
       setShowImagePopUp(true);
-      e.target.value = "";
-      previews.length = 0;
     }
 
-    const previewUrls = validImages.map((file) => ({
+    const combinedImages = [...images, ...newImages];
+
+    const uniqueImages = Array.from(
+      new Map(combinedImages.map((file) => [file.name, file])).values()
+    );
+
+    console.log("New images:", newImages);
+    console.log("Combined images:", combinedImages);
+    console.log("Unique images:", uniqueImages);
+
+    setImages(uniqueImages);
+    setPreviews([]);
+
+    const preview = uniqueImages.map((file) => ({
       name: file.name,
       url: URL.createObjectURL(file),
     }));
-    setPreviews(previewUrls);
+    setPreviews((prev) => [...prev, ...preview]);
+    console.log("Previews:", preview);
   };
 
   return (
@@ -174,6 +184,15 @@ function CreateRecipe() {
                       <img src={preview.url} alt={preview.name} className="image-preview-img" />
                     </div>
                   ))}
+                  <div className="add-more-images">
+                    <button
+                      className="add-more-images-button secondary-button"
+                      type="button"
+                      onClick={handleImageButtonClick}
+                    >
+                      <Plus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -199,7 +218,7 @@ function CreateRecipe() {
         {showImagePopup && (
           <div className="popup-overlay">
             <div className="popup">
-              Files will be deleted. Please select only image files.
+              None image file deleted. Please select only image files.
               <div className="popup-buttons">
                 <button
                   className="popup-cancel-buttons primary-button"
