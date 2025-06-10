@@ -1,4 +1,4 @@
-import { ArrowUpFromLine, X, ArchiveRestore, Plus } from "lucide-react";
+import { ArrowUpFromLine, X, Plus, ImageMinus, ImagePlus } from "lucide-react";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipe.css";
@@ -161,7 +161,17 @@ function CreateRecipe() {
                   type="button"
                   onClick={handleImageButtonClick}
                 >
-                  <ArchiveRestore absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
+                  <ImagePlus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
+                </button>
+                <button
+                  className="recipe-image-upload-button secondary-button"
+                  type="button"
+                  onClick={() => {
+                    setImages([]);
+                    setPreviews([]);
+                  }}
+                >
+                  <ImageMinus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
                 </button>
                 <input
                   className="upload-button"
