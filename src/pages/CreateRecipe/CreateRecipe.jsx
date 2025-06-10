@@ -69,10 +69,6 @@ function CreateRecipe() {
       new Map(combinedImages.map((file) => [file.name, file])).values()
     );
 
-    console.log("New images:", newImages);
-    console.log("Combined images:", combinedImages);
-    console.log("Unique images:", uniqueImages);
-
     setImages(uniqueImages);
     setPreviews([]);
 
@@ -81,7 +77,6 @@ function CreateRecipe() {
       url: URL.createObjectURL(file),
     }));
     setPreviews((prev) => [...prev, ...preview]);
-    console.log("Previews:", preview);
   };
 
   return (
