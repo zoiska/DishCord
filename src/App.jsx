@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "./authContext.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
+import CreateRecipe from "./pages/CreateRecipe/CreateRecipe.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
@@ -12,7 +13,10 @@ function App() {
   let { isAuthenticated, isLoading } = useAuth();
 
   const location = useLocation();
-  const hideNav = location.pathname === "/login" || location.pathname === "/register";
+  const hideNav =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/create-recipe";
 
   return (
     <div className="app">
@@ -33,6 +37,7 @@ function App() {
             )
           }
         />
+        <Route path="/create-recipe" element={<CreateRecipe />} />
       </Routes>
 
       {!hideNav && <BottomNav />}
