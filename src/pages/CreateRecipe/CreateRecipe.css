@@ -13,7 +13,6 @@ textarea {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -24,6 +23,7 @@ textarea {
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  width: 90dvw;
 }
 
 .create-recipe-body::-webkit-scrollbar {
