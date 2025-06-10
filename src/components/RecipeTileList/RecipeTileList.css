@@ -148,7 +148,7 @@
   bottom: 0;
   left: 0;
   padding: 0.2rem 0.5rem;
-  height: calc(var(--bottomNav-height) - 0.5rem);
+  height: calc(var(--bottomNav-height) - 0.7rem);
   width: calc(100% - 1rem);
   display: flex;
   gap: 1rem;
