@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
 import dishcordLogo from "../../assets/logo.png";
-import { useAuth } from "../../authContext.jsx";
+import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
 import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
+import { useAuth } from "../../contexts/authContext.jsx";
 
 function Home() {
   const navigate = useNavigate();
