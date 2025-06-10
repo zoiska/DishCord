@@ -91,7 +91,7 @@ function CreateRecipe() {
               <input
                 className="recipe-title"
                 type="text"
-                placeholder="Kartoffelgratin"
+                placeholder="Recipe Title"
                 minLength="1"
                 required
               />
