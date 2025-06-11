@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { getUserData } from "../services/UserService.js";
+import { createContext, useContext, useState } from "react";
 
 const UserDataContext = createContext();
 
@@ -15,13 +14,6 @@ export function UserDataProvider({ children }) {
     dislikedRecipes: [],
     favoriteRecipes: [],
   });
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getUserData(setUserData);
-    }
-  }, []);
 
   return (
     <UserDataContext.Provider value={{ userData, setUserData }}>

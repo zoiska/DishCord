@@ -1,19 +1,29 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import dishcordLogo from "../../assets/logo.png";
 import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
 import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
 import { useAuth } from "../../contexts/authContext.jsx";
+import { useUserData } from "../../contexts/userDataContext.jsx";
+import { getUserData } from "../../services/UserService.js";
 
 function Home() {
   const navigate = useNavigate();
   let { isAuthenticated, setIsAuthenticated } = useAuth();
   let showSignInButton = !isAuthenticated;
   let showLogoutButton = isAuthenticated;
+  let { setUserData } = useUserData();
 
   function toLogin() {
     navigate("/login");
   }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUserData(setUserData);
+    }
+  }, []);
 
   function logoutToLogin() {
     setIsAuthenticated(false);
