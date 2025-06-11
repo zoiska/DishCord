@@ -169,6 +169,9 @@ function CreateRecipe() {
                   onClick={() => {
                     setImages([]);
                     setPreviews([]);
+                    if (fileInputRef.current) {
+                      fileInputRef.current.value = null;
+                    }
                   }}
                 >
                   <ImageMinus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
