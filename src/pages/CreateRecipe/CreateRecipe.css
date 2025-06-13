@@ -122,7 +122,6 @@ textarea {
   align-items: center;
   background-color: transparent;
   border: 1px solid var(--color-text);
-  border-radius: 14px;
 }
 
 .image-preview {
