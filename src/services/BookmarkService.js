@@ -3,8 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export async function bookmarkRecipe(recipeId) {
   const token = localStorage.getItem("t");
   if (!token) {
-    console.error("No token found in local storage.");
-    return null;
+    throw new Error("No token found in local storage.");
   }
   try {
     const res = await fetch(`${API_URL}/bookmarks`, {
