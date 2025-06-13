@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { useAuth } from "./authContext.jsx";
 import BottomNav from "./components/BottomNav/BottomNav.jsx";
+import { useAuth } from "./contexts/authContext.jsx";
 import CreateRecipe from "./pages/CreateRecipe/CreateRecipe.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";

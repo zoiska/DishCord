@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export async function login(user, setIsAuthenticated, navigate) {
+export async function login(user, setIsAuthenticated) {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -11,24 +11,16 @@ export async function login(user, setIsAuthenticated, navigate) {
     });
     if (!response.ok) {
       // TODO: maybe log error and show a message to the user
-      throw new Error("Failed to fetch recipes");
-    }
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("t", data.token);
-      setIsAuthenticated(true);
-      navigate("/");
-    } else {
-      // TODO: Handle error (show UI message)
-      // "wrong password" or "user not found"
       const error = await response.json();
       console.error(error);
+      throw new Error("Failed to login");
     }
     const data = await response.json();
+    localStorage.setItem("t", data.token);
+    setIsAuthenticated(true);
     return data;
   } catch (error) {
     // TODO: Handle error (show UI message)
-    // "Network error" or "Server not reachable" probably
     console.error("Login error:", error);
   }
 }
