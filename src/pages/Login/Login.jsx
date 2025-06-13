@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import dishcordLogo from "../../assets/logo.png";
-import { useAuth } from "../../authContext.jsx";
+import { useAuth } from "../../contexts/authContext.jsx";
 import { login } from "../../services/AuthService.js";
 
 export default function Login() {
@@ -33,7 +33,10 @@ export default function Login() {
   const navigate = useNavigate();
 
   async function loginClicked() {
-    await login(user, setIsAuthenticated, navigate);
+    const loginSuccess = await login(user, setIsAuthenticated);
+    if (loginSuccess) {
+      navigate("/");
+    }
   }
 
   const validate = () => {
