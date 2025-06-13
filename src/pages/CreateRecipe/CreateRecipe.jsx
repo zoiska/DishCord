@@ -100,18 +100,10 @@ function CreateRecipe() {
             <div className="form-group">
               <div className="ingredients-buttons">
                 <label htmlFor="recipe-ingredients">Ingredients</label>
-                <button
-                  className="removeingredient secondary-button"
-                  type="button"
-                  onClick={removeingredient}
-                >
+                <button className="removeingredient" type="button" onClick={removeingredient}>
                   -
                 </button>
-                <button
-                  className="addingredient secondary-button"
-                  type="button"
-                  onClick={addingredient}
-                >
+                <button className="addingredient" type="button" onClick={addingredient}>
                   +
                 </button>
               </div>
