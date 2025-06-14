@@ -4,7 +4,8 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { registerSW } from "virtual:pwa-register";
 import App from "./App.jsx";
-import { AuthCheck } from "./authContext.jsx";
+import { AuthCheck } from "./contexts/authContext.jsx";
+import { UserDataProvider } from "./contexts/userDataContext.jsx";
 
 registerSW();
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthCheck>
-        <App />
+        <UserDataProvider>
+          <App />
+        </UserDataProvider>
       </AuthCheck>
     </BrowserRouter>
   </StrictMode>
