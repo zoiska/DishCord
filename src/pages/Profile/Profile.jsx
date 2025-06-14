@@ -1,5 +1,5 @@
 import { Bookmark, Book, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
 import "./Profile.css";
@@ -8,6 +8,8 @@ function Profile() {
   const [activeButton, setActiveButton] = useState("tab1");
   const [recipes, setRecipes] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuRef = useRef(null);
 
   useEffect(() => {
     getAllRecipes().then((r) => {
@@ -22,6 +24,19 @@ function Profile() {
   const handleMenuButtonClick = () => {
     setMenuOpen(true);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -68,7 +83,7 @@ function Profile() {
 
         {menuOpen && (
           <div className="menu-overlay">
-            <div className="menu-container">
+            <div className="menu-container" ref={menuRef}>
               <div className="menu-header">
                 <span className="options-title">Options</span>
                 <button className="menu-close-button" onClick={() => setMenuOpen(false)}>
