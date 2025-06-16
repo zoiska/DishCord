@@ -10,7 +10,7 @@ function Profile() {
   const [activeButton, setActiveButton] = useState("tab1");
   const [recipes, setRecipes] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  //const [userName, setUserName] = useState("Username");
+  let { userName, setUserData } = useUserData();
 
   const menuRef = useRef(null);
 
