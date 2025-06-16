@@ -34,7 +34,8 @@ textarea {
 .form-group {
   display: flex;
   flex-direction: column;
-  margin: 1rem 0 0 0;
+  padding: 1rem 0 0 0;
+  width: 100%;
 }
 
 .recipe-title {
@@ -89,9 +90,9 @@ textarea {
   background-color: transparent;
   border-radius: 14px;
   border: 1px solid var(--color-primary);
-  padding: 0.2rem 0.5rem;
+  padding: 0.5rem;
   text-align: left;
-  height: auto;
+  height: 96px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   resize: none;
 }
@@ -125,39 +126,36 @@ textarea {
 }
 
 .image-preview {
-  margin: 0.3rem 0 0 0;
-  border-radius: 14px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  padding-bottom: 0.5rem;
+  gap: 0.5rem;
+  --image-width: calc(45dvw - 1rem);
+  width: calc(90dvw - 1rem);
+  padding: 0.5rem;
+  border-radius: 14px;
 }
 
 .image-preview-item {
-  display: flex;
   align-items: center;
-  flex-direction: row;
+  width: var(--image-width);
+  height: var(--image-width);
 }
 
 .image-preview-img {
   border-radius: 14px;
   object-fit: cover;
-  width: 12rem;
-  height: 12rem;
+  width: 100%;
+  height: 100%;
 }
 
 .add-more-images {
-  width: calc(100% / 3 - 0.2rem);
+  width: calc(50% - 0.5rem);
 }
 
 .add-more-images-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 12rem;
-  width: 12rem;
+  width: 100%;
+  height: 100%;
 }
 
 .popup-overlay {
