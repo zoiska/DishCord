@@ -2,7 +2,8 @@ import { Bookmark, Book, Menu, X, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
-//import { getUserData } from "../../services/UserService";
+import { useUserData }from "../../contexts/UserDataContext.jsx"
+import { getUserData } from "../../services/UserService";
 import "./Profile.css";
 
 function Profile() {
