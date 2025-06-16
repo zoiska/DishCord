@@ -1,7 +1,8 @@
-import { Bookmark, Book, Menu, X } from "lucide-react";
+import { Bookmark, Book, Menu, X, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
+//import { getUserData } from "../../services/UserService";
 import "./Profile.css";
 
 function Profile() {
@@ -10,6 +11,8 @@ function Profile() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuRef = useRef(null);
+
+  //const userName = getUserData.username || "User";
 
   useEffect(() => {
     getAllRecipes().then((r) => {
