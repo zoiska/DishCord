@@ -81,6 +81,10 @@ function CreateRecipe() {
 
   function autoResizeTextarea(e) {
     e.style.height = "auto";
+    if (e.scrollHeight < 96) {
+      e.style.height = "96px";
+      return;
+    }
     e.style.height = e.scrollHeight + "px";
   }
 
@@ -105,10 +109,20 @@ function CreateRecipe() {
             <div className="form-group">
               <div className="ingredients-buttons">
                 <label htmlFor="recipe-ingredients">Ingredients</label>
-                <button className="add-ingredient" type="button" onClick={addingredient} aria-label="Add ingredient">
+                <button
+                  className="add-ingredient"
+                  type="button"
+                  onClick={addingredient}
+                  aria-label="Add ingredient"
+                >
                   <Plus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
                 </button>
-                <button className="remove-ingredient" type="button" onClick={removeingredient} aria-label="Remove ingredient">
+                <button
+                  className="remove-ingredient"
+                  type="button"
+                  onClick={removeingredient}
+                  aria-label="Remove ingredient"
+                >
                   <Minus absoluteStrokeWidth={1} size={28} color="var(--color-text)" />
                 </button>
               </div>
