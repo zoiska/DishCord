@@ -1,5 +1,5 @@
 import { Bookmark, Book, Menu, X, User } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
 //import { getUserData } from "../../services/UserService";
@@ -9,10 +9,19 @@ function Profile() {
   const [activeButton, setActiveButton] = useState("tab1");
   const [recipes, setRecipes] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  //const [userName, setUserName] = useState("Username");
 
   const menuRef = useRef(null);
 
-  //const userName = getUserData.username || "User";
+  //const userName = getUserData.data.username || "Username";
+
+  /*
+  useEffect(() => {
+    getUserData().then((userData) => {
+      setUserName(userData.username);
+    });
+  }, []);
+*/
 
   useEffect(() => {
     getAllRecipes().then((r) => {
@@ -53,7 +62,7 @@ function Profile() {
               onClick={handleMenuButtonClick}
             />
           </button>
-          <h1 className="title">Hello Username</h1>
+          <h1 className="title">Hello</h1>
         </div>
         <div className="profile-content">
           <div className="profile-buttons">
