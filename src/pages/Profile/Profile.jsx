@@ -14,15 +14,9 @@ function Profile() {
 
   const menuRef = useRef(null);
 
-  //const userName = getUserData.data.username || "Username";
-
-  /*
   useEffect(() => {
-    getUserData().then((userData) => {
-      setUserName(userData.username);
-    });
-  }, []);
-*/
+      getUserData(setUserData);
+  }, [])
 
   useEffect(() => {
     getAllRecipes().then((r) => {
