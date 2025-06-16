@@ -1,5 +1,5 @@
 import { Bookmark, Book, Menu, X, User } from "lucide-react";
-import { useState, useEffect, useRef, use } from "react";
+import { useState, useEffect, useRef } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { getAllRecipes } from "../../services/RecipeService";
 //import { getUserData } from "../../services/UserService";
