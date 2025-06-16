@@ -23,7 +23,7 @@ function Home() {
     if (isAuthenticated) {
       getUserData(setUserData);
     }
-  }, []);
+  }, [isAuthenticated, setUserData]);
 
   function logoutToLogin() {
     setIsAuthenticated(false);
