@@ -62,7 +62,7 @@ function Profile() {
               onClick={handleMenuButtonClick}
             />
           </button>
-          <h1 className="title">Hello</h1>
+          <h1 className="title">Hello {userData.user.username}</h1>
         </div>
         <div className="profile-content">
           <div className="profile-buttons">
