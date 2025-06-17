@@ -158,11 +158,17 @@
   z-index: 10;
 }
 
+.footer-button-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .footer-button {
   background: var(--color-primary-rgba);
   border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
 }

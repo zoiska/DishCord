@@ -200,40 +200,84 @@ const RecipeTileList = ({ recipes, user, setUserData }) => {
             </article>
           </div>
           <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
-            <ThumbsUp
-              className="footer-button"
-              size={24}
-              color="var(--color-primary)"
-              absoluteStrokeWidth={1}
-              onClick={() => handleLikeClick(selectedRecipe)}
-            />
-            <ThumbsDown
-              className="footer-button"
-              size={24}
-              color="var(--color-primary)"
-              absoluteStrokeWidth={1}
-              onClick={() => handleDislikeClick(selectedRecipe)}
-            />
-            <Bookmark
-              className="footer-button"
-              size={24}
-              color="var(--color-primary)"
-              absoluteStrokeWidth={1}
-              onClick={() => handleBookmarkClick(selectedRecipe)}
-            />
-            <MessageCircle
-              className="footer-button"
-              size={24}
-              color="var(--color-primary)"
-              absoluteStrokeWidth={1}
-            />
-            <X
-              className="footer-button"
-              size={24}
-              color="var(--color-primary)"
-              absoluteStrokeWidth={1}
-              onClick={() => setSelectedRecipe(null)}
-            />
+            <div className="footer-button-wrapper">
+              <ThumbsUp
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.likedRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <ThumbsUp
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+                onClick={() => handleLikeClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <ThumbsDown
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.dislikedRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <ThumbsDown
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                onClick={() => handleDislikeClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <Bookmark
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.favoriteRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <Bookmark
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                onClick={() => handleBookmarkClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <MessageCircle className="footer-button" size={24} color="transparent" />
+              <MessageCircle
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <X className="footer-button" size={24} color="transparent" />
+              <X
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+                onClick={() => setSelectedRecipe(null)}
+              />
+            </div>
           </div>
         </div>
       )}
