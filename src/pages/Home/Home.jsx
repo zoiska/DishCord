@@ -28,6 +28,13 @@ function Home() {
   function logoutToLogin() {
     setIsAuthenticated(false);
     localStorage.removeItem("t");
+    setUserData({
+      username: "",
+      ownRecipes: [],
+      likedRecipes: [],
+      dislikedRecipes: [],
+      favoriteRecipes: [],
+    });
     navigate("/login");
   }
 
