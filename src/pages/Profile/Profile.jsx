@@ -94,6 +94,7 @@ function Profile() {
               <div className="tab-content">
                 <RecipeTileList
                   recipes={ownRecipes}
+                  setRecipes={setOwnRecipes}
                   user={userData.user}
                   setUserData={setUserData}
                 />
@@ -103,6 +104,7 @@ function Profile() {
               <div className="tab-content">
                 <RecipeTileList
                   recipes={favouriteRecipes}
+                  setRecipes={setFavouriteRecipes}
                   user={userData.user}
                   setUserData={setUserData}
                 />

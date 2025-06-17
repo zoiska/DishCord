@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
 
-const RecipeTileList = ({ recipes, user, setUserData }) => {
+const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const tileRefs = useRef([]);
 
@@ -61,6 +61,36 @@ const RecipeTileList = ({ recipes, user, setUserData }) => {
     });
   };
 
+  const updateLikeDislikeCount = (recipeId, sentiment) => {
+    const isLiked = user.likedRecipes.includes(recipeId);
+    const isDisliked = user.dislikedRecipes.includes(recipeId);
+    if (sentiment === "like") {
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((r) => {
+          if (r._id !== recipeId) return r;
+
+          return {
+            ...r,
+            likeCount: isLiked ? r.likeCount - 1 : r.likeCount + 1,
+            dislikeCount: isDisliked ? r.dislikeCount - 1 : r.dislikeCount,
+          };
+        })
+      );
+    } else if (sentiment === "dislike") {
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((r) => {
+          if (r._id !== recipeId) return r;
+
+          return {
+            ...r,
+            dislikeCount: isDisliked ? r.dislikeCount - 1 : r.dislikeCount + 1,
+            likeCount: isLiked ? r.likeCount - 1 : r.likeCount,
+          };
+        })
+      );
+    }
+  };
+
   const handleBookmarkClick = (recipe) => {
     if (!user) {
       console.log("Not logged in");
@@ -89,6 +119,7 @@ const RecipeTileList = ({ recipes, user, setUserData }) => {
 
     updateLikeDislike(recipe._id, "like");
     sentimentRecipe(recipe._id, "like");
+    updateLikeDislikeCount(recipe._id, "like");
   };
 
   const handleDislikeClick = (recipe) => {
@@ -104,6 +135,7 @@ const RecipeTileList = ({ recipes, user, setUserData }) => {
 
     updateLikeDislike(recipe._id, "dislike");
     sentimentRecipe(recipe._id, "dislike");
+    updateLikeDislikeCount(recipe._id, "dislike");
   };
 
   useEffect(() => {
@@ -162,8 +194,8 @@ const RecipeTileList = ({ recipes, user, setUserData }) => {
                   />
                 </div>
                 <div className="tile-rating-values">
-                  <span>{77}</span>
-                  <span>{44}</span>
+                  <span>{recipe.likeCount}</span>
+                  <span>{recipe.dislikeCount}</span>
                 </div>
               </div>
             </div>
