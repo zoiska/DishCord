@@ -42,7 +42,7 @@ function RecipeBrowser() {
         />
       </form>
       <div className="recipe-browser">
-        <RecipeTileList recipes={recipes} user={userData.user} />
+        <RecipeTileList recipes={recipes} user={userData.user} setUserData={setUserData} />
       </div>
     </div>
   );

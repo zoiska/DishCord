@@ -3,9 +3,63 @@ import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
 
-const RecipeTileList = ({ recipes, user }) => {
+const RecipeTileList = ({ recipes, user, setUserData }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const tileRefs = useRef([]);
+
+  const updateFavorite = (recipeId) => {
+    setUserData((prevData) => {
+      const user = prevData.user;
+      const isFav = user.favoriteRecipes.includes(recipeId);
+      const updatedFavorites = isFav
+        ? user.favoriteRecipes.filter((id) => id !== recipeId)
+        : [...user.favoriteRecipes, recipeId];
+
+      return {
+        ...prevData,
+        user: {
+          ...user,
+          favoriteRecipes: updatedFavorites,
+        },
+      };
+    });
+  };
+
+  const updateLikeDislike = (recipeId, sentiment) => {
+    setUserData((prevData) => {
+      const user = prevData.user;
+      let updatedLikes = user.likedRecipes;
+      let updatedDislikes = user.dislikedRecipes;
+      const isLiked = user.likedRecipes.includes(recipeId);
+      const isDisliked = user.dislikedRecipes.includes(recipeId);
+      if (sentiment === "like") {
+        updatedLikes = isLiked
+          ? user.likedRecipes.filter((id) => id !== recipeId)
+          : [...user.likedRecipes, recipeId];
+
+        if (isDisliked) {
+          updatedDislikes = user.dislikedRecipes.filter((id) => id !== recipeId);
+        }
+      } else if (sentiment === "dislike") {
+        updatedDislikes = isDisliked
+          ? user.dislikedRecipes.filter((id) => id !== recipeId)
+          : [...user.dislikedRecipes, recipeId];
+
+        if (isLiked) {
+          updatedLikes = user.likedRecipes.filter((id) => id !== recipeId);
+        }
+      }
+
+      return {
+        ...prevData,
+        user: {
+          ...user,
+          likedRecipes: updatedLikes,
+          dislikedRecipes: updatedDislikes,
+        },
+      };
+    });
+  };
 
   const handleBookmarkClick = (recipe) => {
     if (!user) {
@@ -18,6 +72,7 @@ const RecipeTileList = ({ recipes, user }) => {
       return;
     }
 
+    updateFavorite(recipe._id);
     bookmarkRecipe(recipe._id);
   };
 
@@ -32,6 +87,7 @@ const RecipeTileList = ({ recipes, user }) => {
       return;
     }
 
+    updateLikeDislike(recipe._id, "like");
     sentimentRecipe(recipe._id, "like");
   };
 
@@ -46,6 +102,7 @@ const RecipeTileList = ({ recipes, user }) => {
       return;
     }
 
+    updateLikeDislike(recipe._id, "dislike");
     sentimentRecipe(recipe._id, "dislike");
   };
 
