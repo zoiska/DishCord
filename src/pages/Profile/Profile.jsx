@@ -21,7 +21,8 @@ function Profile() {
   }, [setUserData]);
 
   useEffect(() => {
-    filterRecipesByAuthor(userData.user.username).then((r) => {
+    if (!userData?.user?.username) return;
+    filterRecipesByAuthor(userData?.user?.username).then((r) => {
       setOwnRecipes(r);
     });
 
@@ -69,7 +70,9 @@ function Profile() {
               onClick={handleMenuButtonClick}
             />
           </button>
-          <h1 className="title">Hello {userData.user.username}</h1>
+          {userData?.user?.username && (
+            <h1 className="title">Hello {userData.user.username + "!"}</h1>
+          )}
         </div>
         <div className="profile-content">
           <div className="profile-buttons">
