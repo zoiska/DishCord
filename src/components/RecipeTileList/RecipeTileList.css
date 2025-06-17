@@ -151,9 +151,24 @@
   height: calc(var(--bottomNav-height) - 0.7rem);
   width: calc(100% - 1rem);
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
   background-color: var(--color-bottomNav);
   border-top: 1px solid #303030;
   z-index: 10;
+}
+
+.footer-button-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.footer-button {
+  background: var(--color-primary-rgba);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
 }

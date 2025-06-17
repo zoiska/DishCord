@@ -1,18 +1,141 @@
 import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
+import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
 
-const RecipeTileList = ({ recipes }) => {
+const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const tileRefs = useRef([]);
 
-  const handleBookmarkClick = (recipeId) => {
-    // handle the bookmark click
-    console.log(`Bookmark clicked for recipe ID: ${recipeId}`);
+  const updateFavorite = (recipeId) => {
+    setUserData((prevData) => {
+      const user = prevData.user;
+      const isFav = user.favoriteRecipes.includes(recipeId);
+      const updatedFavorites = isFav
+        ? user.favoriteRecipes.filter((id) => id !== recipeId)
+        : [...user.favoriteRecipes, recipeId];
+
+      return {
+        ...prevData,
+        user: {
+          ...user,
+          favoriteRecipes: updatedFavorites,
+        },
+      };
+    });
   };
 
-  const test = () => {
-    console.log("test");
+  const updateLikeDislike = (recipeId, sentiment) => {
+    setUserData((prevData) => {
+      const user = prevData.user;
+      let updatedLikes = user.likedRecipes;
+      let updatedDislikes = user.dislikedRecipes;
+      const isLiked = user.likedRecipes.includes(recipeId);
+      const isDisliked = user.dislikedRecipes.includes(recipeId);
+      if (sentiment === "like") {
+        updatedLikes = isLiked
+          ? user.likedRecipes.filter((id) => id !== recipeId)
+          : [...user.likedRecipes, recipeId];
+
+        if (isDisliked) {
+          updatedDislikes = user.dislikedRecipes.filter((id) => id !== recipeId);
+        }
+      } else if (sentiment === "dislike") {
+        updatedDislikes = isDisliked
+          ? user.dislikedRecipes.filter((id) => id !== recipeId)
+          : [...user.dislikedRecipes, recipeId];
+
+        if (isLiked) {
+          updatedLikes = user.likedRecipes.filter((id) => id !== recipeId);
+        }
+      }
+
+      return {
+        ...prevData,
+        user: {
+          ...user,
+          likedRecipes: updatedLikes,
+          dislikedRecipes: updatedDislikes,
+        },
+      };
+    });
+  };
+
+  const updateLikeDislikeCount = (recipeId, sentiment) => {
+    const isLiked = user.likedRecipes.includes(recipeId);
+    const isDisliked = user.dislikedRecipes.includes(recipeId);
+    if (sentiment === "like") {
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((r) => {
+          if (r._id !== recipeId) return r;
+
+          return {
+            ...r,
+            likeCount: isLiked ? r.likeCount - 1 : r.likeCount + 1,
+            dislikeCount: isDisliked ? r.dislikeCount - 1 : r.dislikeCount,
+          };
+        })
+      );
+    } else if (sentiment === "dislike") {
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((r) => {
+          if (r._id !== recipeId) return r;
+
+          return {
+            ...r,
+            dislikeCount: isDisliked ? r.dislikeCount - 1 : r.dislikeCount + 1,
+            likeCount: isLiked ? r.likeCount - 1 : r.likeCount,
+          };
+        })
+      );
+    }
+  };
+
+  const handleBookmarkClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot bookmark your own recipe");
+      return;
+    }
+
+    updateFavorite(recipe._id);
+    bookmarkRecipe(recipe._id);
+  };
+
+  const handleLikeClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot like your own recipe");
+      return;
+    }
+
+    updateLikeDislike(recipe._id, "like");
+    sentimentRecipe(recipe._id, "like");
+    updateLikeDislikeCount(recipe._id, "like");
+  };
+
+  const handleDislikeClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot dislike your own recipe");
+      return;
+    }
+
+    updateLikeDislike(recipe._id, "dislike");
+    sentimentRecipe(recipe._id, "dislike");
+    updateLikeDislikeCount(recipe._id, "dislike");
   };
 
   useEffect(() => {
@@ -27,12 +150,10 @@ const RecipeTileList = ({ recipes }) => {
         threshold: Array.from({ length: 11 }, (_, i) => i / 10),
       }
     );
-
     const currentRefs = tileRefs.current;
-    currentRefs.forEach((tile) => tile && observer.observe(tile));
-
+    Object.values(currentRefs).forEach((tile) => tile && observer.observe(tile));
     return () => {
-      currentRefs.forEach((tile) => tile && observer.unobserve(tile));
+      Object.values(currentRefs).forEach((tile) => tile && observer.unobserve(tile));
     };
   }, [recipes]);
 
@@ -41,9 +162,9 @@ const RecipeTileList = ({ recipes }) => {
       <div className="tile-list">
         {recipes.map((recipe) => (
           <div
-            key={recipe.id}
+            key={recipe._id}
             className="tile"
-            ref={(el) => (tileRefs.current[recipe.id] = el)}
+            ref={(el) => (tileRefs.current[recipe._id] = el)}
             onClick={() => setSelectedRecipe(recipe)}
           >
             <Bookmark
@@ -52,20 +173,29 @@ const RecipeTileList = ({ recipes }) => {
               size={32}
               onClick={(e) => {
                 e.stopPropagation();
-                handleBookmarkClick(recipe.id);
+                handleBookmarkClick(recipe);
               }}
+              fill={user?.favoriteRecipes?.includes(String(recipe._id)) ? "yellow" : "none"}
             />
             <div className="tile-content">
               <span className="tile-name">{recipe.name}</span>
               <span className="tile-author">{"by " + recipe.author}</span>
               <div className="tile-ratings">
                 <div className="tile-rating-icons">
-                  <ThumbsUp color="green" size={20} />
-                  <ThumbsDown color="red" size={20} />
+                  <ThumbsUp
+                    color="green"
+                    size={20}
+                    fill={user?.likedRecipes?.includes(String(recipe._id)) ? "green" : "none"}
+                  />
+                  <ThumbsDown
+                    color="red"
+                    size={20}
+                    fill={user?.dislikedRecipes?.includes(String(recipe._id)) ? "red" : "none"}
+                  />
                 </div>
                 <div className="tile-rating-values">
-                  <span>{77}</span>
-                  <span>{44}</span>
+                  <span>{recipe.likeCount}</span>
+                  <span>{recipe.dislikeCount}</span>
                 </div>
               </div>
             </div>
@@ -102,21 +232,84 @@ const RecipeTileList = ({ recipes }) => {
             </article>
           </div>
           <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
-            <button className="footer-button" onClick={() => test()}>
-              <ThumbsUp size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <ThumbsDown size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <Bookmark size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <MessageCircle size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => setSelectedRecipe(null)}>
-              <X size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
+            <div className="footer-button-wrapper">
+              <ThumbsUp
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.likedRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <ThumbsUp
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+                onClick={() => handleLikeClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <ThumbsDown
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.dislikedRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <ThumbsDown
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                onClick={() => handleDislikeClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <Bookmark
+                className="footer-button"
+                size={24}
+                color="transparent"
+                fill={
+                  user?.favoriteRecipes?.includes(String(selectedRecipe._id))
+                    ? "var(--color-text)"
+                    : "none"
+                }
+              />
+              <Bookmark
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                onClick={() => handleBookmarkClick(selectedRecipe)}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <MessageCircle className="footer-button" size={24} color="transparent" />
+              <MessageCircle
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+              />
+            </div>
+
+            <div className="footer-button-wrapper">
+              <X className="footer-button" size={24} color="transparent" />
+              <X
+                className="footer-button"
+                size={24}
+                color="var(--color-primary)"
+                absoluteStrokeWidth={1}
+                onClick={() => setSelectedRecipe(null)}
+              />
+            </div>
           </div>
         </div>
       )}

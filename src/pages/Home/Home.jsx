@@ -27,6 +27,7 @@ function Home() {
 
   function logoutToLogin() {
     setIsAuthenticated(false);
+    setUserData(null);
     localStorage.removeItem("t");
     setUserData({
       username: "",

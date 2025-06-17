@@ -2,13 +2,15 @@ import { Bookmark, Book, Menu, X, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
 import { useUserData } from "../../contexts/userDataContext.jsx";
-import { getAllRecipes } from "../../services/RecipeService";
+import { filterRecipesByAuthor, getAllRecipes } from "../../services/RecipeService";
 import { getUserData } from "../../services/UserService";
 import "./Profile.css";
 
 function Profile() {
   const [activeButton, setActiveButton] = useState("tab1");
   const [recipes, setRecipes] = useState([]);
+  const [ownRecipes, setOwnRecipes] = useState([]);
+  const [favouriteRecipes, setFavouriteRecipes] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   let { userData, setUserData } = useUserData();
 
@@ -19,10 +21,21 @@ function Profile() {
   }, [setUserData]);
 
   useEffect(() => {
+    if (!userData?.user?.username) return;
+    filterRecipesByAuthor(userData?.user?.username).then((r) => {
+      setOwnRecipes(r);
+    });
+
     getAllRecipes().then((r) => {
       setRecipes(r);
     });
-  }, []);
+  }, [userData]);
+
+  useEffect(() => {
+    setFavouriteRecipes(
+      recipes.filter((recipe) => userData.user.favoriteRecipes.includes(recipe._id))
+    );
+  }, [recipes, userData]);
 
   const handleButtonClick = (tab) => {
     setActiveButton(tab);
@@ -57,7 +70,9 @@ function Profile() {
               onClick={handleMenuButtonClick}
             />
           </button>
-          <h1 className="title">Hello {userData.user.username}</h1>
+          {userData?.user?.username && (
+            <h1 className="title">Hello {userData.user.username + "!"}</h1>
+          )}
         </div>
         <div className="profile-content">
           <div className="profile-buttons">
@@ -77,12 +92,22 @@ function Profile() {
           <div className="profile-tab-content">
             {activeButton === "tab1" && (
               <div className="tab-content">
-                <RecipeTileList recipes={recipes} />
+                <RecipeTileList
+                  recipes={ownRecipes}
+                  setRecipes={setOwnRecipes}
+                  user={userData.user}
+                  setUserData={setUserData}
+                />
               </div>
             )}
             {activeButton === "tab2" && (
               <div className="tab-content">
-                <RecipeTileList recipes={recipes} />
+                <RecipeTileList
+                  recipes={favouriteRecipes}
+                  setRecipes={setFavouriteRecipes}
+                  user={userData.user}
+                  setUserData={setUserData}
+                />
               </div>
             )}
           </div>

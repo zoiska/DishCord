@@ -61,3 +61,15 @@ export async function searchRecipes(query) {
   const data = await response.json();
   return data;
 }
+
+export async function filterRecipesByAuthor(author) {
+  const response = await fetch(
+    `${API_URL}/recipes/filter/author?query=${encodeURIComponent(author)}`
+  );
+  if (!response.ok) {
+    // TODO: error handling
+    throw new Error("Failed to search recipes");
+  }
+  const data = await response.json();
+  return data;
+}
