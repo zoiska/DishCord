@@ -45,7 +45,7 @@ function RecipeBrowser() {
         <RecipeTileList
           recipes={recipes}
           setRecipes={setRecipes}
-          user={userData.user}
+          user={userData?.user}
           setUserData={setUserData}
         />
       </div>
