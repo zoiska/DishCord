@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 import RecipeTileList from "../../components/RecipeTileList/RecipeTileList";
+import { useAuth } from "../../contexts/authContext.jsx";
+import { useUserData } from "../../contexts/userDataContext.jsx";
 import { getAllRecipes, searchRecipes } from "../../services/RecipeService";
+import { getUserData } from "../../services/UserService.js";
 import "./RecipeBrowser.css";
 
 function RecipeBrowser() {
   const [recipes, setRecipes] = useState([]);
+  let { userData, setUserData } = useUserData();
+  let { isAuthenticated } = useAuth();
 
   useEffect(() => {
     getAllRecipes().then((r) => {
       setRecipes(r);
     });
-  }, []);
+
+    if (isAuthenticated) {
+      getUserData(setUserData);
+    }
+  }, [isAuthenticated, setUserData]);
 
   const handleInput = (event) => {
     event.preventDefault();
@@ -24,10 +33,16 @@ function RecipeBrowser() {
     <div className="recipe-browser-wrapper">
       <h1 className="title">Recipe Browser</h1>
       <form role="search" className="recipe-search-form">
-        <input className="search-input" type="search" name="query" placeholder="Search..." onInput={handleInput} />
+        <input
+          className="search-input"
+          type="search"
+          name="query"
+          placeholder="Search..."
+          onInput={handleInput}
+        />
       </form>
       <div className="recipe-browser">
-        <RecipeTileList recipes={recipes} />
+        <RecipeTileList recipes={recipes} user={userData.user} />
       </div>
     </div>
   );

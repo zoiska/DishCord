@@ -1,18 +1,52 @@
 import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
+import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
 
-const RecipeTileList = ({ recipes }) => {
+const RecipeTileList = ({ recipes, user }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const tileRefs = useRef([]);
 
-  const handleBookmarkClick = (recipeId) => {
-    // handle the bookmark click
-    console.log(`Bookmark clicked for recipe ID: ${recipeId}`);
+  const handleBookmarkClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot bookmark your own recipe");
+      return;
+    }
+
+    bookmarkRecipe(recipe._id);
   };
 
-  const test = () => {
-    console.log("test");
+  const handleLikeClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot like your own recipe");
+      return;
+    }
+
+    sentimentRecipe(recipe._id, "like");
+  };
+
+  const handleDislikeClick = (recipe) => {
+    if (!user) {
+      console.log("Not logged in");
+      return;
+    }
+
+    if (recipe.author === user.username) {
+      console.log("Cannot dislike your own recipe");
+      return;
+    }
+
+    sentimentRecipe(recipe._id, "dislike");
   };
 
   useEffect(() => {
@@ -27,12 +61,10 @@ const RecipeTileList = ({ recipes }) => {
         threshold: Array.from({ length: 11 }, (_, i) => i / 10),
       }
     );
-
     const currentRefs = tileRefs.current;
-    currentRefs.forEach((tile) => tile && observer.observe(tile));
-
+    Object.values(currentRefs).forEach((tile) => tile && observer.observe(tile));
     return () => {
-      currentRefs.forEach((tile) => tile && observer.unobserve(tile));
+      Object.values(currentRefs).forEach((tile) => tile && observer.unobserve(tile));
     };
   }, [recipes]);
 
@@ -41,9 +73,9 @@ const RecipeTileList = ({ recipes }) => {
       <div className="tile-list">
         {recipes.map((recipe) => (
           <div
-            key={recipe.id}
+            key={recipe._id}
             className="tile"
-            ref={(el) => (tileRefs.current[recipe.id] = el)}
+            ref={(el) => (tileRefs.current[recipe._id] = el)}
             onClick={() => setSelectedRecipe(recipe)}
           >
             <Bookmark
@@ -52,16 +84,25 @@ const RecipeTileList = ({ recipes }) => {
               size={32}
               onClick={(e) => {
                 e.stopPropagation();
-                handleBookmarkClick(recipe.id);
+                handleBookmarkClick(recipe);
               }}
+              fill={user?.favoriteRecipes?.includes(String(recipe._id)) ? "yellow" : "none"}
             />
             <div className="tile-content">
               <span className="tile-name">{recipe.name}</span>
               <span className="tile-author">{"by " + recipe.author}</span>
               <div className="tile-ratings">
                 <div className="tile-rating-icons">
-                  <ThumbsUp color="green" size={20} />
-                  <ThumbsDown color="red" size={20} />
+                  <ThumbsUp
+                    color="green"
+                    size={20}
+                    fill={user?.likedRecipes?.includes(String(recipe._id)) ? "green" : "none"}
+                  />
+                  <ThumbsDown
+                    color="red"
+                    size={20}
+                    fill={user?.dislikedRecipes?.includes(String(recipe._id)) ? "red" : "none"}
+                  />
                 </div>
                 <div className="tile-rating-values">
                   <span>{77}</span>
@@ -102,21 +143,40 @@ const RecipeTileList = ({ recipes }) => {
             </article>
           </div>
           <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
-            <button className="footer-button" onClick={() => test()}>
-              <ThumbsUp size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <ThumbsDown size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <Bookmark size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => test()}>
-              <MessageCircle size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
-            <button className="footer-button" onClick={() => setSelectedRecipe(null)}>
-              <X size={24} color="var(--color-primary)" absoluteStrokeWidth={1} />
-            </button>
+            <ThumbsUp
+              className="footer-button"
+              size={24}
+              color="var(--color-primary)"
+              absoluteStrokeWidth={1}
+              onClick={() => handleLikeClick(selectedRecipe)}
+            />
+            <ThumbsDown
+              className="footer-button"
+              size={24}
+              color="var(--color-primary)"
+              absoluteStrokeWidth={1}
+              onClick={() => handleDislikeClick(selectedRecipe)}
+            />
+            <Bookmark
+              className="footer-button"
+              size={24}
+              color="var(--color-primary)"
+              absoluteStrokeWidth={1}
+              onClick={() => handleBookmarkClick(selectedRecipe)}
+            />
+            <MessageCircle
+              className="footer-button"
+              size={24}
+              color="var(--color-primary)"
+              absoluteStrokeWidth={1}
+            />
+            <X
+              className="footer-button"
+              size={24}
+              color="var(--color-primary)"
+              absoluteStrokeWidth={1}
+              onClick={() => setSelectedRecipe(null)}
+            />
           </div>
         </div>
       )}
