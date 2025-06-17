@@ -29,7 +29,6 @@ function Profile() {
     if (count < 2) {
       getAllRecipes().then((r) => {
         setRecipes(r);
-        console.log("test");
       });
       setCount((c) => c + 1);
     } else {
