@@ -6,6 +6,7 @@ import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipe
 import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
 import { useAuth } from "../../contexts/authContext.jsx";
 import { useUserData } from "../../contexts/userDataContext.jsx";
+import { createComment } from "../../services/InteractionService.js";
 import { getUserData } from "../../services/UserService.js";
 
 function Home() {
@@ -55,6 +56,13 @@ function Home() {
         <img src={dishcordLogo} className="logo" alt="DishCord logo" />
         <h1 className="title">DishCord</h1>
         <ServiceStatus />
+        <button
+          onClick={() => {
+            createComment("68435482cac1a6c815d861e0", "Wundervolle Kartoffel ;)");
+          }}
+        >
+          Comment
+        </button>
       </div>
       <CreateRecipeButton />
     </>
