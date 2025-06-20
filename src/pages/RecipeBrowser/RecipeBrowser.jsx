@@ -32,7 +32,7 @@ function RecipeBrowser() {
   return (
     <div className="recipe-browser-wrapper">
       <h1 className="title">Recipe Browser</h1>
-      <form role="search" className="recipe-search-form">
+      <form role="search" className="recipe-search-form" onSubmit={(e) => e.preventDefault()}>
         <input
           className="search-input"
           type="search"
