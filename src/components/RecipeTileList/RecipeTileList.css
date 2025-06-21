@@ -164,6 +164,7 @@
 }
 
 .footer-button {
+  background: var(--color-primary-rgba);
   border-radius: 6px;
   cursor: pointer;
   padding: 0.5rem 1rem;
