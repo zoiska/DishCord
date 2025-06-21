@@ -197,11 +197,13 @@ textarea {
   bottom: 0;
   left: 0;
   width: 100dvw;
-  background: #1a1a1a;
+  height: calc(var(--bottomNav-height) - 1rem);
+  background: var(--color-bottomNav);
   border-top: 1px solid #303030;
   display: flex;
   justify-content: space-around;
-  height: var(--bottomNav-height);
+  padding: 0.3rem 0;
+  z-index: 10;
 }
 
 .create-button {

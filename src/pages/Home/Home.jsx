@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import dishcordLogo from "../../assets/logo.png";
 import CreateRecipeButton from "../../components/CreateRecipeButton/CreateRecipeButton.jsx";
+import RandomRecipeButton from "../../components/RandomRecipeButton/RandomRecipeButton.jsx";
 import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
 import { useAuth } from "../../contexts/authContext.jsx";
 import { useUserData } from "../../contexts/userDataContext.jsx";
@@ -57,6 +58,7 @@ function Home() {
         <ServiceStatus />
       </div>
       <CreateRecipeButton />
+      <RandomRecipeButton />
     </>
   );
 }
