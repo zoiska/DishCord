@@ -6,17 +6,15 @@
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  height: 50%;
   opacity: 0;
 }
 .fade-in {
-  height: 100%;
   opacity: 1;
-  transition: height 0.4s ease-out, opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
 }
 
 .random-recipe-content {
-  background: #242424;
+  background: var(--color-background);
   height: calc(100dvh - var(--bottomNav-height) - 0.5rem);
   width: 100dvw;
   padding: 0 2rem calc(var(--bottomNav-height) + 0.5rem) 2rem;
@@ -47,9 +45,14 @@
   padding: 0.25rem 0;
   border-bottom: 1px solid #333;
 }
-.random-ingredient-name,
+
+.random-ingredient-name {
+  font-size: 1rem;
+}
+
 .random-ingredient-amount {
   font-size: 1rem;
+  text-wrap: nowrap;
 }
 
 .random-recipe-nav {
