@@ -252,12 +252,12 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
           {selectedRecipe.author === user.username && (
             <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
               <div className="footer-edit-button-wrapper">
-                <X
+                <Trash2
                   className="footer-edit-button"
                   size={24}
                   color="var(--color-primary)"
                   absoluteStrokeWidth={1}
-                  onClick={() => setSelectedRecipe(null)}
+                  onClick={() => handleDeleteRecipeClick()}
                 />
 
                 <RefreshCw
@@ -267,12 +267,12 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
                   absoluteStrokeWidth={1}
                 />
 
-                <Trash2
+                <X
                   className="footer-edit-button"
                   size={24}
                   color="var(--color-primary)"
                   absoluteStrokeWidth={1}
-                  onClick={() => handleDeleteRecipeClick()}
+                  onClick={() => setSelectedRecipe(null)}
                 />
               </div>
             </div>
