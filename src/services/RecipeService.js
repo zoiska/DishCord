@@ -59,7 +59,8 @@ export async function deleteRecipe(id) {
   if (!response.ok) {
     throw new Error("Failed to delete recipe");
   }
-  return response.status === 204;
+  const data = await response.json();
+  return data;
 }
 
 export async function searchRecipes(query) {
