@@ -249,7 +249,7 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
               <p>{selectedRecipe.preparation}</p>
             </article>
           </div>
-          {selectedRecipe.author === user.username && (
+          {selectedRecipe.author === user?.username && (
             <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
               <div className="footer-edit-button-wrapper">
                 <Trash2
@@ -277,7 +277,7 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
               </div>
             </div>
           )}
-          {selectedRecipe.author !== user.username && (
+          {selectedRecipe.author !== user?.username && (
             <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
               <div className="footer-button-wrapper">
                 <ThumbsUp
