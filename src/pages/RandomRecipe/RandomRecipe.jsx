@@ -2,7 +2,7 @@ import "./RandomRecipe.css";
 import { Dices, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getAllRecipes } from "../../services/RecipeService";
+import { getRandomRecipe } from "../../services/RecipeService";
 
 function RandomRecipe() {
   const [recipe, setRecipe] = useState(null);
@@ -11,15 +11,15 @@ function RandomRecipe() {
   const loadNewRecipe = () => {
     setFadeIn(false);
     setRecipe(null);
-    getAllRecipes().then((r) => {
-      setRecipe(r[0]);
+    getRandomRecipe().then((r) => {
+      setRecipe(r);
       setTimeout(() => setFadeIn(true), 50);
     });
   };
 
   useEffect(() => {
-    getAllRecipes().then((r) => {
-      setRecipe(r[0]);
+    getRandomRecipe().then((r) => {
+      setRecipe(r);
       setTimeout(() => setFadeIn(true), 50);
     });
   }, []);
