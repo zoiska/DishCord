@@ -84,3 +84,13 @@ export async function filterRecipesByAuthor(author) {
   const data = await response.json();
   return data;
 }
+
+export async function getRandomRecipe() {
+  const response = await fetch(`${API_URL}/recipes/random`);
+  if (!response.ok) {
+    // TODO: error handling
+    throw new Error("Failed to fetch random recipe");
+  }
+  const data = await response.json();
+  return data;
+}

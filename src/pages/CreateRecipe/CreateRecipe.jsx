@@ -252,11 +252,11 @@ function CreateRecipe() {
         )}
 
         <div className="bottom-nav-create-recipe">
-          <button className="cancel-button" onClick={handleCancelEvent}>
-            <X size={32} color="var(--color-primary)" absoluteStrokeWidth={1} />
-          </button>
           <button className="create-button" type="button" onClick={create}>
             <ArrowUpFromLine size={32} color="var(--color-primary)" absoluteStrokeWidth={1} />
+          </button>
+          <button className="cancel-button" onClick={handleCancelEvent}>
+            <X size={32} color="var(--color-primary)" absoluteStrokeWidth={1} />
           </button>
         </div>
       </div>

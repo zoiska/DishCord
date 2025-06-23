@@ -5,9 +5,9 @@ import "./CreateRecipeButton.css";
 function CreateRecipeButton() {
   const navigate = useNavigate();
 
-  function toCreateRecipe() {
+  const toCreateRecipe = () => {
     navigate("/create-recipe");
-  }
+  };
 
   return (
     <button className="create-recipe-button secondary-button" onClick={toCreateRecipe}>
