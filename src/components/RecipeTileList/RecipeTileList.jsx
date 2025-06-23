@@ -371,7 +371,7 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
                   </button>
                   <button
                     className="popup-cancel-buttons primary-button"
-                    onClick={handlePopupConfirm}
+                    onClick={() => handlePopupConfirm(selectedRecipe)}
                   >
                     Yes
                   </button>
