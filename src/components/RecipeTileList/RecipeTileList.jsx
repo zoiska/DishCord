@@ -1,10 +1,12 @@
-import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle, Pencil, Trash2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
+import { deleteRecipe } from "../../services/RecipeService";
 
 const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [showPopup, setShowPopUp] = useState(false);
   const tileRefs = useRef([]);
 
   const updateFavorite = (recipeId) => {
@@ -138,6 +140,21 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
     updateLikeDislikeCount(recipe._id, "dislike");
   };
 
+  const handleDeleteRecipeClick = () => {
+    setShowPopUp(true);
+  };
+
+  const handlePopupCancel = () => {
+    setShowPopUp(false);
+  };
+
+  const handlePopupConfirm = (recipe) => {
+    setShowPopUp(false);
+    setRecipes((prevRecipes) => prevRecipes.filter((r) => r._id !== recipe._id));
+    setSelectedRecipe(null);
+    deleteRecipe(recipe._id);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -231,86 +248,137 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
               <p>{selectedRecipe.preparation}</p>
             </article>
           </div>
-          <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
-            <div className="footer-button-wrapper">
-              <ThumbsUp
-                className="footer-button"
-                size={24}
-                color="transparent"
-                fill={
-                  user?.likedRecipes?.includes(String(selectedRecipe._id))
-                    ? "var(--color-text)"
-                    : "none"
-                }
-              />
-              <ThumbsUp
-                className="footer-button"
-                size={24}
-                color="var(--color-primary)"
-                absoluteStrokeWidth={1}
-                onClick={() => handleLikeClick(selectedRecipe)}
-              />
-            </div>
+          {selectedRecipe.author === user?.username && (
+            <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
+              <div className="footer-edit-button-wrapper">
+                <Trash2
+                  className="footer-edit-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                  onClick={() => handleDeleteRecipeClick()}
+                />
 
-            <div className="footer-button-wrapper">
-              <ThumbsDown
-                className="footer-button"
-                size={24}
-                color="transparent"
-                fill={
-                  user?.dislikedRecipes?.includes(String(selectedRecipe._id))
-                    ? "var(--color-text)"
-                    : "none"
-                }
-              />
-              <ThumbsDown
-                className="footer-button"
-                size={24}
-                color="var(--color-primary)"
-                onClick={() => handleDislikeClick(selectedRecipe)}
-              />
-            </div>
+                <Pencil
+                  className="footer-edit-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                />
 
-            <div className="footer-button-wrapper">
-              <Bookmark
-                className="footer-button"
-                size={24}
-                color="transparent"
-                fill={
-                  user?.favoriteRecipes?.includes(String(selectedRecipe._id))
-                    ? "var(--color-text)"
-                    : "none"
-                }
-              />
-              <Bookmark
-                className="footer-button"
-                size={24}
-                color="var(--color-primary)"
-                onClick={() => handleBookmarkClick(selectedRecipe)}
-              />
+                <X
+                  className="footer-edit-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                  onClick={() => setSelectedRecipe(null)}
+                />
+              </div>
             </div>
+          )}
+          {selectedRecipe.author !== user?.username && (
+            <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
+              <div className="footer-button-wrapper">
+                <ThumbsUp
+                  className="footer-button"
+                  size={24}
+                  color="transparent"
+                  fill={
+                    user?.likedRecipes?.includes(String(selectedRecipe._id))
+                      ? "var(--color-text)"
+                      : "none"
+                  }
+                />
+                <ThumbsUp
+                  className="footer-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                  onClick={() => handleLikeClick(selectedRecipe)}
+                />
+              </div>
 
-            <div className="footer-button-wrapper">
-              <MessageCircle className="footer-button" size={24} color="transparent" />
-              <MessageCircle
-                className="footer-button"
-                size={24}
-                color="var(--color-primary)"
-                absoluteStrokeWidth={1}
-              />
-            </div>
+              <div className="footer-button-wrapper">
+                <ThumbsDown
+                  className="footer-button"
+                  size={24}
+                  color="transparent"
+                  fill={
+                    user?.dislikedRecipes?.includes(String(selectedRecipe._id))
+                      ? "var(--color-text)"
+                      : "none"
+                  }
+                />
+                <ThumbsDown
+                  className="footer-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  onClick={() => handleDislikeClick(selectedRecipe)}
+                />
+              </div>
 
-            <div className="footer-button-wrapper">
-              <X className="footer-button" size={24} color="transparent" />
-              <X
-                className="footer-button"
-                size={24}
-                color="var(--color-primary)"
-                absoluteStrokeWidth={1}
-                onClick={() => setSelectedRecipe(null)}
-              />
+              <div className="footer-button-wrapper">
+                <Bookmark
+                  className="footer-button"
+                  size={24}
+                  color="transparent"
+                  fill={
+                    user?.favoriteRecipes?.includes(String(selectedRecipe._id))
+                      ? "var(--color-text)"
+                      : "none"
+                  }
+                />
+                <Bookmark
+                  className="footer-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  onClick={() => handleBookmarkClick(selectedRecipe)}
+                />
+              </div>
+
+              <div className="footer-button-wrapper">
+                <MessageCircle className="footer-button" size={24} color="transparent" />
+                <MessageCircle
+                  className="footer-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                />
+              </div>
+
+              <div className="footer-button-wrapper">
+                <X className="footer-button" size={24} color="transparent" />
+                <X
+                  className="footer-button"
+                  size={24}
+                  color="var(--color-primary)"
+                  absoluteStrokeWidth={1}
+                  onClick={() => setSelectedRecipe(null)}
+                />
+              </div>
             </div>
-          </div>
+          )}
+          {showPopup && (
+            <div className="popup-overlay" onClick={(e) => e.stopPropagation()}>
+              <div className="popup">
+                Delete this recipe?
+                <div className="popup-buttons">
+                  <button
+                    className="popup-cancel-buttons secondary-button"
+                    onClick={handlePopupCancel}
+                  >
+                    No
+                  </button>
+                  <button
+                    className="popup-cancel-buttons primary-button"
+                    onClick={() => handlePopupConfirm(selectedRecipe)}
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

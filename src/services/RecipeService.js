@@ -52,6 +52,17 @@ export async function updateRecipe(id, recipe) {
   return data;
 }
 
+export async function deleteRecipe(id) {
+  const response = await fetch(`${API_URL}/recipes/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete recipe");
+  }
+  const data = await response.json();
+  return data;
+}
+
 export async function searchRecipes(query) {
   const response = await fetch(`${API_URL}/recipes/search?query=${encodeURIComponent(query)}`);
   if (!response.ok) {
@@ -69,6 +80,16 @@ export async function filterRecipesByAuthor(author) {
   if (!response.ok) {
     // TODO: error handling
     throw new Error("Failed to search recipes");
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getRandomRecipe() {
+  const response = await fetch(`${API_URL}/recipes/random`);
+  if (!response.ok) {
+    // TODO: error handling
+    throw new Error("Failed to fetch random recipe");
   }
   const data = await response.json();
   return data;

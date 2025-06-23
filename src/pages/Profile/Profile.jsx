@@ -13,9 +13,9 @@ function Profile() {
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   let { userData, setUserData } = useUserData();
+  const [count, setCount] = useState(0);
 
   const menuRef = useRef(null);
-
   useEffect(() => {
     getUserData(setUserData);
   }, [setUserData]);
@@ -26,14 +26,21 @@ function Profile() {
       setOwnRecipes(r);
     });
 
-    getAllRecipes().then((r) => {
-      setRecipes(r);
-    });
-  }, [userData]);
+    if (count < 2) {
+      getAllRecipes().then((r) => {
+        setRecipes(r);
+      });
+      setCount((c) => c + 1);
+    } else {
+      setCount(0);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipes, userData]);
 
   useEffect(() => {
     setFavouriteRecipes(
-      recipes.filter((recipe) => userData.user.favoriteRecipes.includes(recipe._id))
+      recipes.filter((recipe) => userData?.user?.favoriteRecipes.includes(recipe._id))
     );
   }, [recipes, userData]);
 
