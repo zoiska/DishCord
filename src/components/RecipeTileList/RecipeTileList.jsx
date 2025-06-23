@@ -1,4 +1,4 @@
-import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle, RefreshCw, Trash2 } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle, Pencil, Trash2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
 import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
@@ -150,7 +150,6 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
 
   const handlePopupConfirm = (recipe) => {
     setShowPopUp(false);
-    //passt das so mit neuer darstellung?
     setRecipes((prevRecipes) => prevRecipes.filter((r) => r._id !== recipe._id));
     setSelectedRecipe(null);
     deleteRecipe(recipe._id);
@@ -260,7 +259,7 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
                   onClick={() => handleDeleteRecipeClick()}
                 />
 
-                <RefreshCw
+                <Pencil
                   className="footer-edit-button"
                   size={24}
                   color="var(--color-primary)"
