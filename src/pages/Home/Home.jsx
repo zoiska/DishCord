@@ -57,7 +57,7 @@ function Home() {
         <h1 className="title">DishCord</h1>
         <ServiceStatus />
       </div>
-      <CreateRecipeButton />
+      {showLogoutButton && <CreateRecipeButton />}
       <RandomRecipeButton />
     </>
   );
