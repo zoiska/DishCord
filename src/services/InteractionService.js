@@ -65,7 +65,7 @@ export async function getAllComments(recipeId) {
     });
     if (res.ok) {
       const data = await res.json();
-      console.log("Successfully fetched comments for:", recipeId);
+      console.log("Successfully fetched comments for:", recipeId, data);
       return data;
     } else {
       const error = await res.json();
@@ -98,5 +98,28 @@ export async function createComment(recipeId, commentText) {
     }
   } catch (error) {
     console.error("Error adding comment", error);
+  }
+}
+
+export async function deleteComment(recipeId, commentId) {
+  const token = localStorage.getItem("t");
+  if (!token) {
+    throw new Error("No token found in local storage.");
+  }
+  try {
+    const res = await fetch(`${API_URL}/recipes/${recipeId}/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    if (res.ok) {
+      console.log("Successfully deleted comment", commentId, "from recipe", recipeId);
+      return true;
+    }
+  } catch (error) {
+    console.error("Error deleting comment", error);
+    return false;
   }
 }
