@@ -65,7 +65,6 @@ export async function getAllComments(recipeId) {
     });
     if (res.ok) {
       const data = await res.json();
-      console.log("Successfully fetched comments for:", recipeId, data);
       return data;
     } else {
       const error = await res.json();
@@ -115,8 +114,11 @@ export async function deleteComment(recipeId, commentId) {
       },
     });
     if (res.ok) {
-      console.log("Successfully deleted comment", commentId, "from recipe", recipeId);
       return true;
+    } else {
+      const error = await res.json();
+      console.error("Error deleting comment", error);
+      return false;
     }
   } catch (error) {
     console.error("Error deleting comment", error);
