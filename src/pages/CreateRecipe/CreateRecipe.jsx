@@ -2,6 +2,7 @@ import { ArrowUpFromLine, X, Minus, Plus, ImageMinus, ImagePlus } from "lucide-r
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipe.css";
+import { createRecipe } from "../../services/RecipeService";
 
 function CreateRecipe() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function CreateRecipe() {
   const fileInputRef = useRef(null);
 
   const create = () => {
-    // post recipe to backend
+    createRecipe();
     navigate("/");
   };
 
@@ -252,7 +253,7 @@ function CreateRecipe() {
         )}
 
         <div className="bottom-nav-create-recipe">
-          <button className="create-button" type="button" onClick={create}>
+          <button className="create-button" type="button" onClick={() => create()}>
             <ArrowUpFromLine size={32} color="var(--color-primary)" absoluteStrokeWidth={1} />
           </button>
           <button className="cancel-button" onClick={handleCancelEvent}>
