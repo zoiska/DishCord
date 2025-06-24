@@ -8,6 +8,7 @@ import ServiceStatus from "../../components/ServiceStatus/ServiceStatus.jsx";
 import { useAuth } from "../../contexts/authContext.jsx";
 import { useUserData } from "../../contexts/userDataContext.jsx";
 import { getUserData } from "../../services/UserService.js";
+import { createComment } from "../../services/InteractionService.js";
 
 function Home() {
   const navigate = useNavigate();
@@ -56,6 +57,13 @@ function Home() {
         <img src={dishcordLogo} className="logo" alt="DishCord logo" />
         <h1 className="title">DishCord</h1>
         <ServiceStatus />
+        <button
+          onClick={() => {
+            createComment("682ddaf9234f38fa782ba743", "Ich liebe Kartoffeln :D");
+          }}
+        >
+          Comment
+        </button>
       </div>
       {showLogoutButton && <CreateRecipeButton />}
       <RandomRecipeButton />

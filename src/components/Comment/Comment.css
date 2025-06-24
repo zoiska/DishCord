@@ -1,0 +1,20 @@
+.commentContainer {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid red 1px;
+}
+
+.commentHeader {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.commentBody {
+  height: 50px;
+  width: 100%;
+  display: flex;
+}
