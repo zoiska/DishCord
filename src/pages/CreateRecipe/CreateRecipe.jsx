@@ -23,7 +23,6 @@ function CreateRecipe() {
   const fileInputRef = useRef(null);
 
   const create = () => {
-    //console.log(images);
     createRecipe({
       ingredients: ingredients,
       name: recipeTitle,
@@ -31,7 +30,7 @@ function CreateRecipe() {
       images: images,
       author: userData?.user?.username,
     });
-    //navigate("/");
+    navigate("/");
   };
 
   useEffect(() => {
