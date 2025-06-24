@@ -1,7 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export async function bookmarkRecipe(recipeId) {
-  console.log(recipeId);
   const token = localStorage.getItem("t");
   if (!token) {
     throw new Error("No token found in local storage.");
@@ -17,7 +16,7 @@ export async function bookmarkRecipe(recipeId) {
     });
     if (res.ok) {
       const data = await res.json();
-      console.log("Recipe bookmarked successfully:", data);
+      console.log("Recipe bookmarked successfully", recipeId);
       return data;
     } else {
       const error = await res.json();
@@ -44,7 +43,7 @@ export async function sentimentRecipe(recipeId, sentiment) {
     });
     if (res.ok) {
       const data = await res.json();
-      console.log("Recipe sentiment updated successfully:", data);
+      console.log("Recipe sentiment updated successfully", recipeId);
       return data;
     } else {
       const error = await res.json();

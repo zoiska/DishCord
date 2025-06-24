@@ -1,13 +1,24 @@
 import { ThumbsUp, ThumbsDown, Bookmark, X, MessageCircle, Pencil, Trash2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./RecipeTileList.css";
-import { sentimentRecipe, bookmarkRecipe } from "../../services/InteractionService";
+import { sentimentRecipe, bookmarkRecipe, getAllComments } from "../../services/InteractionService";
 import { deleteRecipe } from "../../services/RecipeService";
+import Comment from "../Comment/Comment.jsx";
 
 const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [showPopup, setShowPopUp] = useState(false);
+  const [comments, setComments] = useState([]);
   const tileRefs = useRef([]);
+
+  useEffect(() => {
+    if (selectedRecipe) {
+      getAllComments(selectedRecipe._id).then((data) => {
+        setComments(data?.allComments?.comments);
+      });
+    }
+    setComments([]);
+  }, [selectedRecipe]);
 
   const updateFavorite = (recipeId) => {
     setUserData((prevData) => {
@@ -247,6 +258,15 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
               <h3>Zubereitung</h3>
               <p>{selectedRecipe.preparation}</p>
             </article>
+
+            {comments && comments.length > 0 && (
+              <article>
+                <h3>Kommentare</h3>
+                {comments.map((comment, i) => (
+                  <Comment key={i} comment={comment} />
+                ))}
+              </article>
+            )}
           </div>
           {selectedRecipe.author === user?.username && (
             <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
