@@ -21,17 +21,27 @@ export async function getRecipeById(id) {
 }
 
 export async function createRecipe(recipe) {
+  const formData = new FormData();
+
+  formData.append("name", recipe.name);
+  formData.append("preparation", recipe.preparation);
+  formData.append("author", recipe.author);
+  formData.append("ingredients", JSON.stringify(recipe.ingredients));
+
+  recipe.images.forEach((image) => {
+    formData.append("images", image);
+  });
+
   const response = await fetch(`${API_URL}/recipes`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(recipe),
+    headers: { AccessControlAllowOrigin: "*" },
+    body: formData,
   });
   if (!response.ok) {
     // TODO: error handling
     throw new Error("Failed to create recipe");
   }
+
   const data = await response.json();
   return data;
 }
