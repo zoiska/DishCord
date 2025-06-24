@@ -1,8 +1,11 @@
 import { ArrowUpFromLine, X, Minus, Plus, ImageMinus, ImagePlus } from "lucide-react";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRecipe.css";
+import { useAuth } from "../../contexts/authContext.jsx";
+import { useUserData } from "../../contexts/userDataContext.jsx";
 import { createRecipe } from "../../services/RecipeService";
+import { getUserData } from "../../services/UserService.js";
 
 function CreateRecipe() {
   const navigate = useNavigate();
@@ -12,13 +15,30 @@ function CreateRecipe() {
   const [showImagePopup, setShowImagePopUp] = useState(false);
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [recipeTitle, setRecipeTitle] = useState("");
+  const [recipeInstructions, setRecipeInstructions] = useState("");
+  let { isAuthenticated } = useAuth();
+  let { userData, setUserData } = useUserData();
 
   const fileInputRef = useRef(null);
 
   const create = () => {
-    createRecipe();
-    navigate("/");
+    //console.log(images);
+    createRecipe({
+      ingredients: ingredients,
+      name: recipeTitle,
+      preparation: recipeInstructions,
+      images: images,
+      author: userData?.user?.username,
+    });
+    //navigate("/");
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUserData(setUserData);
+    }
+  }, [isAuthenticated, setUserData]);
 
   const handleCancelEvent = () => {
     setShowPopUp(true);
@@ -104,6 +124,7 @@ function CreateRecipe() {
                 placeholder="Recipe Title"
                 minLength="1"
                 required
+                onChange={(e) => setRecipeTitle(e.target.value)}
               />
             </div>
 
@@ -163,6 +184,7 @@ function CreateRecipe() {
                 minLength="1"
                 required
                 onInput={(e) => autoResizeTextarea(e.target)}
+                onChange={(e) => setRecipeInstructions(e.target.value)}
               />
             </div>
 
