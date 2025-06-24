@@ -1,20 +1,32 @@
 .commentContainer {
-  height: 50px;
   width: 100%;
+  padding: 0px 0px 0px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
-  border: solid red 1px;
+  background-color: var(--color-primary-rgba);
+  border: solid var(--color-text) 1px;
+  border-radius: 5px;
 }
 
 .commentHeader {
-  height: 50px;
   width: 100%;
   display: flex;
   flex-direction: row;
 }
 
+.commentAuthor,
+.commentTimestamp {
+  font-weight: bold;
+}
+
+.commentedOn {
+  padding: 0px 5px;
+}
+
 .commentBody {
-  height: 50px;
   width: 100%;
+  padding: 10px 10px 10px 0px;
   display: flex;
 }
