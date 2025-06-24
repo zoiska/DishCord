@@ -1,7 +1,6 @@
 import "./Comment.css";
 
 const Comment = ({ comment }) => {
-  console.log("zeig her bro", comment);
   return (
     <div className="commentContainer">
       <div className="commentHeader">

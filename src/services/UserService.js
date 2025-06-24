@@ -15,7 +15,7 @@ export async function getUserData(setUserData) {
     });
     if (res.ok) {
       const data = await res.json();
-      console.log("User data fetched successfully:", data);
+      console.log("User data fetched successfully");
       setUserData(data);
       return data;
     } else {
