@@ -259,12 +259,14 @@ const RecipeTileList = ({ recipes, setRecipes, user, setUserData }) => {
               <p>{selectedRecipe.preparation}</p>
             </article>
 
-            <article>
-              <h3>Kommentare</h3>
-              {comments.map((comment, i) => (
-                <Comment key={i} comment={comment} />
-              ))}
-            </article>
+            {comments && comments.length > 0 && (
+              <article>
+                <h3>Kommentare</h3>
+                {comments.map((comment, i) => (
+                  <Comment key={i} comment={comment} />
+                ))}
+              </article>
+            )}
           </div>
           {selectedRecipe.author === user?.username && (
             <div className="modal-footer" onClick={(e) => e.stopPropagation()}>
